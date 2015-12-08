@@ -16,7 +16,14 @@ namespace KKShare
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainView());
+
+            // setup MVC
+            MainView view = new MainView();
+            //Model model = new Model();
+            //Controller controller = new Controller(model, view);
+
+            // run
+            Application.Run(view);
         }
     }
 }
