@@ -30,65 +30,67 @@
         {
             this.components = new System.ComponentModel.Container();
             this.peersGroupBox = new System.Windows.Forms.GroupBox();
-            this.RefreshPeersButton = new System.Windows.Forms.Button();
             this.addPeerButton = new System.Windows.Forms.Button();
             this.RemovePeerButton = new System.Windows.Forms.Button();
+            this.RefreshPeersButton = new System.Windows.Forms.Button();
             this.peersTabs = new System.Windows.Forms.TabControl();
             this.lanTabPage = new System.Windows.Forms.TabPage();
+            this.lanDataListView = new BrightIdeasSoftware.DataListView();
             this.internetTabPage = new System.Windows.Forms.TabPage();
+            this.internetDataListView = new BrightIdeasSoftware.DataListView();
             this.logGroupBox = new System.Windows.Forms.GroupBox();
+            this.logFastObjectListView = new BrightIdeasSoftware.FastObjectListView();
+            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.browseTabPage = new System.Windows.Forms.TabPage();
+            this.browseFilesDataListView = new BrightIdeasSoftware.DataListView();
+            this.browseFolderDataTreeListView = new BrightIdeasSoftware.DataTreeListView();
             this.downloadTabPage = new System.Windows.Forms.TabPage();
             this.downloadsTreeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uploadTabPage = new System.Windows.Forms.TabPage();
-            this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.uploadsTreeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.portLabel = new System.Windows.Forms.Label();
-            this.networkGroupBox = new System.Windows.Forms.GroupBox();
-            this.portTextBox = new System.Windows.Forms.TextBox();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.sharedGroupBox = new System.Windows.Forms.GroupBox();
+            this.removeSharedButton = new System.Windows.Forms.Button();
+            this.addSharedButton = new System.Windows.Forms.Button();
             this.sharedDataListView = new BrightIdeasSoftware.DataListView();
             this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.addSharedButton = new System.Windows.Forms.Button();
-            this.removeSharedButton = new System.Windows.Forms.Button();
-            this.logFastObjectListView = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.internetDataListView = new BrightIdeasSoftware.DataListView();
-            this.lanDataListView = new BrightIdeasSoftware.DataListView();
-            this.browseFolderDataTreeListView = new BrightIdeasSoftware.DataTreeListView();
-            this.browseFilesDataListView = new BrightIdeasSoftware.DataListView();
+            this.networkGroupBox = new System.Windows.Forms.GroupBox();
+            this.portLabel = new System.Windows.Forms.Label();
+            this.portTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).BeginInit();
             this.internetTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).BeginInit();
             this.logGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logFastObjectListView)).BeginInit();
             this.mainTabs.SuspendLayout();
             this.browseTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).BeginInit();
             this.downloadTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.downloadsTreeListView)).BeginInit();
             this.uploadTabPage.SuspendLayout();
-            this.settingsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uploadsTreeListView)).BeginInit();
-            this.networkGroupBox.SuspendLayout();
+            this.settingsTabPage.SuspendLayout();
             this.sharedGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logFastObjectListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).BeginInit();
+            this.networkGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // peersGroupBox
@@ -103,15 +105,6 @@
             this.peersGroupBox.TabIndex = 0;
             this.peersGroupBox.TabStop = false;
             this.peersGroupBox.Text = "Peers";
-            // 
-            // RefreshPeersButton
-            // 
-            this.RefreshPeersButton.Location = new System.Drawing.Point(68, 334);
-            this.RefreshPeersButton.Name = "RefreshPeersButton";
-            this.RefreshPeersButton.Size = new System.Drawing.Size(23, 23);
-            this.RefreshPeersButton.TabIndex = 3;
-            this.RefreshPeersButton.Text = "R";
-            this.RefreshPeersButton.UseVisualStyleBackColor = true;
             // 
             // addPeerButton
             // 
@@ -130,6 +123,15 @@
             this.RemovePeerButton.TabIndex = 2;
             this.RemovePeerButton.Text = "-";
             this.RemovePeerButton.UseVisualStyleBackColor = true;
+            // 
+            // RefreshPeersButton
+            // 
+            this.RefreshPeersButton.Location = new System.Drawing.Point(68, 334);
+            this.RefreshPeersButton.Name = "RefreshPeersButton";
+            this.RefreshPeersButton.Size = new System.Drawing.Size(23, 23);
+            this.RefreshPeersButton.TabIndex = 3;
+            this.RefreshPeersButton.Text = "R";
+            this.RefreshPeersButton.UseVisualStyleBackColor = true;
             // 
             // peersTabs
             // 
@@ -152,6 +154,19 @@
             this.lanTabPage.Text = "LAN";
             this.lanTabPage.UseVisualStyleBackColor = true;
             // 
+            // lanDataListView
+            // 
+            this.lanDataListView.CellEditUseWholeCell = false;
+            this.lanDataListView.DataSource = null;
+            this.lanDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.lanDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.lanDataListView.Location = new System.Drawing.Point(6, 6);
+            this.lanDataListView.Name = "lanDataListView";
+            this.lanDataListView.Size = new System.Drawing.Size(168, 271);
+            this.lanDataListView.TabIndex = 1;
+            this.lanDataListView.UseCompatibleStateImageBehavior = false;
+            this.lanDataListView.View = System.Windows.Forms.View.Details;
+            // 
             // internetTabPage
             // 
             this.internetTabPage.Controls.Add(this.internetDataListView);
@@ -163,6 +178,19 @@
             this.internetTabPage.Text = "Internet";
             this.internetTabPage.UseVisualStyleBackColor = true;
             // 
+            // internetDataListView
+            // 
+            this.internetDataListView.CellEditUseWholeCell = false;
+            this.internetDataListView.DataSource = null;
+            this.internetDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.internetDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.internetDataListView.Location = new System.Drawing.Point(6, 6);
+            this.internetDataListView.Name = "internetDataListView";
+            this.internetDataListView.Size = new System.Drawing.Size(168, 271);
+            this.internetDataListView.TabIndex = 0;
+            this.internetDataListView.UseCompatibleStateImageBehavior = false;
+            this.internetDataListView.View = System.Windows.Forms.View.Details;
+            // 
             // logGroupBox
             // 
             this.logGroupBox.Controls.Add(this.logFastObjectListView);
@@ -172,6 +200,44 @@
             this.logGroupBox.TabIndex = 2;
             this.logGroupBox.TabStop = false;
             this.logGroupBox.Text = "Log";
+            // 
+            // logFastObjectListView
+            // 
+            this.logFastObjectListView.AllColumns.Add(this.olvColumn7);
+            this.logFastObjectListView.AllColumns.Add(this.olvColumn8);
+            this.logFastObjectListView.AllColumns.Add(this.olvColumn9);
+            this.logFastObjectListView.CellEditUseWholeCell = false;
+            this.logFastObjectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn7,
+            this.olvColumn8,
+            this.olvColumn9});
+            this.logFastObjectListView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.logFastObjectListView.FullRowSelect = true;
+            this.logFastObjectListView.GridLines = true;
+            this.logFastObjectListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.logFastObjectListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.logFastObjectListView.Location = new System.Drawing.Point(6, 20);
+            this.logFastObjectListView.Name = "logFastObjectListView";
+            this.logFastObjectListView.ShowGroups = false;
+            this.logFastObjectListView.Size = new System.Drawing.Size(748, 142);
+            this.logFastObjectListView.TabIndex = 0;
+            this.logFastObjectListView.UseCompatibleStateImageBehavior = false;
+            this.logFastObjectListView.View = System.Windows.Forms.View.Details;
+            this.logFastObjectListView.VirtualMode = true;
+            // 
+            // olvColumn7
+            // 
+            this.olvColumn7.Text = "Time";
+            this.olvColumn7.Width = 100;
+            // 
+            // olvColumn8
+            // 
+            this.olvColumn8.Text = "Severity";
+            // 
+            // olvColumn9
+            // 
+            this.olvColumn9.Text = "Description";
+            this.olvColumn9.Width = 584;
             // 
             // mainTabs
             // 
@@ -196,6 +262,35 @@
             this.browseTabPage.TabIndex = 0;
             this.browseTabPage.Text = "Browse";
             this.browseTabPage.UseVisualStyleBackColor = true;
+            // 
+            // browseFilesDataListView
+            // 
+            this.browseFilesDataListView.CellEditUseWholeCell = false;
+            this.browseFilesDataListView.DataSource = null;
+            this.browseFilesDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.browseFilesDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.browseFilesDataListView.Location = new System.Drawing.Point(198, 6);
+            this.browseFilesDataListView.Name = "browseFilesDataListView";
+            this.browseFilesDataListView.Size = new System.Drawing.Size(341, 319);
+            this.browseFilesDataListView.TabIndex = 1;
+            this.browseFilesDataListView.UseCompatibleStateImageBehavior = false;
+            this.browseFilesDataListView.View = System.Windows.Forms.View.Details;
+            // 
+            // browseFolderDataTreeListView
+            // 
+            this.browseFolderDataTreeListView.CellEditUseWholeCell = false;
+            this.browseFolderDataTreeListView.DataSource = null;
+            this.browseFolderDataTreeListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.browseFolderDataTreeListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.browseFolderDataTreeListView.Location = new System.Drawing.Point(6, 6);
+            this.browseFolderDataTreeListView.Name = "browseFolderDataTreeListView";
+            this.browseFolderDataTreeListView.RootKeyValueString = "";
+            this.browseFolderDataTreeListView.ShowGroups = false;
+            this.browseFolderDataTreeListView.Size = new System.Drawing.Size(185, 319);
+            this.browseFolderDataTreeListView.TabIndex = 0;
+            this.browseFolderDataTreeListView.UseCompatibleStateImageBehavior = false;
+            this.browseFolderDataTreeListView.View = System.Windows.Forms.View.Details;
+            this.browseFolderDataTreeListView.VirtualMode = true;
             // 
             // downloadTabPage
             // 
@@ -256,18 +351,6 @@
             this.uploadTabPage.Text = "Uploads";
             this.uploadTabPage.UseVisualStyleBackColor = true;
             // 
-            // settingsTabPage
-            // 
-            this.settingsTabPage.Controls.Add(this.sharedGroupBox);
-            this.settingsTabPage.Controls.Add(this.networkGroupBox);
-            this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.settingsTabPage.Name = "settingsTabPage";
-            this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.settingsTabPage.Size = new System.Drawing.Size(545, 331);
-            this.settingsTabPage.TabIndex = 3;
-            this.settingsTabPage.Text = "Settings";
-            this.settingsTabPage.UseVisualStyleBackColor = true;
-            // 
             // uploadsTreeListView
             // 
             this.uploadsTreeListView.AllColumns.Add(this.olvColumn4);
@@ -305,14 +388,76 @@
             this.olvColumn6.Text = "Progress";
             this.olvColumn6.Width = 100;
             // 
-            // portLabel
+            // settingsTabPage
             // 
-            this.portLabel.AutoSize = true;
-            this.portLabel.Location = new System.Drawing.Point(6, 22);
-            this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(29, 13);
-            this.portLabel.TabIndex = 0;
-            this.portLabel.Text = "Port:";
+            this.settingsTabPage.Controls.Add(this.sharedGroupBox);
+            this.settingsTabPage.Controls.Add(this.networkGroupBox);
+            this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.settingsTabPage.Name = "settingsTabPage";
+            this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTabPage.Size = new System.Drawing.Size(545, 331);
+            this.settingsTabPage.TabIndex = 3;
+            this.settingsTabPage.Text = "Settings";
+            this.settingsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // sharedGroupBox
+            // 
+            this.sharedGroupBox.Controls.Add(this.removeSharedButton);
+            this.sharedGroupBox.Controls.Add(this.addSharedButton);
+            this.sharedGroupBox.Controls.Add(this.sharedDataListView);
+            this.sharedGroupBox.Location = new System.Drawing.Point(223, 6);
+            this.sharedGroupBox.Name = "sharedGroupBox";
+            this.sharedGroupBox.Size = new System.Drawing.Size(316, 319);
+            this.sharedGroupBox.TabIndex = 3;
+            this.sharedGroupBox.TabStop = false;
+            this.sharedGroupBox.Text = "Shared Folders";
+            // 
+            // removeSharedButton
+            // 
+            this.removeSharedButton.Location = new System.Drawing.Point(35, 289);
+            this.removeSharedButton.Name = "removeSharedButton";
+            this.removeSharedButton.Size = new System.Drawing.Size(23, 23);
+            this.removeSharedButton.TabIndex = 2;
+            this.removeSharedButton.Text = "-";
+            this.removeSharedButton.UseVisualStyleBackColor = true;
+            // 
+            // addSharedButton
+            // 
+            this.addSharedButton.Location = new System.Drawing.Point(6, 289);
+            this.addSharedButton.Name = "addSharedButton";
+            this.addSharedButton.Size = new System.Drawing.Size(23, 23);
+            this.addSharedButton.TabIndex = 1;
+            this.addSharedButton.Text = "+";
+            this.addSharedButton.UseVisualStyleBackColor = true;
+            // 
+            // sharedDataListView
+            // 
+            this.sharedDataListView.AllColumns.Add(this.olvColumn10);
+            this.sharedDataListView.AllColumns.Add(this.olvColumn11);
+            this.sharedDataListView.CellEditUseWholeCell = false;
+            this.sharedDataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn10,
+            this.olvColumn11});
+            this.sharedDataListView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sharedDataListView.DataSource = null;
+            this.sharedDataListView.FullRowSelect = true;
+            this.sharedDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.Location = new System.Drawing.Point(6, 19);
+            this.sharedDataListView.Name = "sharedDataListView";
+            this.sharedDataListView.Size = new System.Drawing.Size(304, 264);
+            this.sharedDataListView.TabIndex = 0;
+            this.sharedDataListView.UseCompatibleStateImageBehavior = false;
+            this.sharedDataListView.View = System.Windows.Forms.View.Details;
+            // 
+            // olvColumn10
+            // 
+            this.olvColumn10.Text = "Folder";
+            this.olvColumn10.Width = 240;
+            // 
+            // olvColumn11
+            // 
+            this.olvColumn11.Text = "Files";
             // 
             // networkGroupBox
             // 
@@ -326,6 +471,15 @@
             this.networkGroupBox.TabIndex = 2;
             this.networkGroupBox.TabStop = false;
             this.networkGroupBox.Text = "Network";
+            // 
+            // portLabel
+            // 
+            this.portLabel.AutoSize = true;
+            this.portLabel.Location = new System.Drawing.Point(6, 22);
+            this.portLabel.Name = "portLabel";
+            this.portLabel.Size = new System.Drawing.Size(29, 13);
+            this.portLabel.TabIndex = 0;
+            this.portLabel.Text = "Port:";
             // 
             // portTextBox
             // 
@@ -352,157 +506,13 @@
             this.nameTextBox.Size = new System.Drawing.Size(142, 20);
             this.nameTextBox.TabIndex = 3;
             this.nameTextBox.Text = "...";
+            this.nameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxName_Validating);
             // 
-            // sharedGroupBox
+            // inputErrorProvider
             // 
-            this.sharedGroupBox.Controls.Add(this.removeSharedButton);
-            this.sharedGroupBox.Controls.Add(this.addSharedButton);
-            this.sharedGroupBox.Controls.Add(this.sharedDataListView);
-            this.sharedGroupBox.Location = new System.Drawing.Point(223, 6);
-            this.sharedGroupBox.Name = "sharedGroupBox";
-            this.sharedGroupBox.Size = new System.Drawing.Size(316, 319);
-            this.sharedGroupBox.TabIndex = 3;
-            this.sharedGroupBox.TabStop = false;
-            this.sharedGroupBox.Text = "Shared Folders";
-            // 
-            // sharedDataListView
-            // 
-            this.sharedDataListView.AllColumns.Add(this.olvColumn10);
-            this.sharedDataListView.AllColumns.Add(this.olvColumn11);
-            this.sharedDataListView.CellEditUseWholeCell = false;
-            this.sharedDataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn10,
-            this.olvColumn11});
-            this.sharedDataListView.DataSource = null;
-            this.sharedDataListView.FullRowSelect = true;
-            this.sharedDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.sharedDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.sharedDataListView.Location = new System.Drawing.Point(6, 19);
-            this.sharedDataListView.Name = "sharedDataListView";
-            this.sharedDataListView.Size = new System.Drawing.Size(304, 264);
-            this.sharedDataListView.TabIndex = 0;
-            this.sharedDataListView.UseCompatibleStateImageBehavior = false;
-            this.sharedDataListView.View = System.Windows.Forms.View.Details;
-            // 
-            // olvColumn10
-            // 
-            this.olvColumn10.Text = "Folder";
-            this.olvColumn10.Width = 240;
-            // 
-            // olvColumn11
-            // 
-            this.olvColumn11.Text = "Files";
-            // 
-            // addSharedButton
-            // 
-            this.addSharedButton.Location = new System.Drawing.Point(6, 289);
-            this.addSharedButton.Name = "addSharedButton";
-            this.addSharedButton.Size = new System.Drawing.Size(23, 23);
-            this.addSharedButton.TabIndex = 1;
-            this.addSharedButton.Text = "+";
-            this.addSharedButton.UseVisualStyleBackColor = true;
-            // 
-            // removeSharedButton
-            // 
-            this.removeSharedButton.Location = new System.Drawing.Point(35, 289);
-            this.removeSharedButton.Name = "removeSharedButton";
-            this.removeSharedButton.Size = new System.Drawing.Size(23, 23);
-            this.removeSharedButton.TabIndex = 2;
-            this.removeSharedButton.Text = "-";
-            this.removeSharedButton.UseVisualStyleBackColor = true;
-            // 
-            // logFastObjectListView
-            // 
-            this.logFastObjectListView.AllColumns.Add(this.olvColumn7);
-            this.logFastObjectListView.AllColumns.Add(this.olvColumn8);
-            this.logFastObjectListView.AllColumns.Add(this.olvColumn9);
-            this.logFastObjectListView.CellEditUseWholeCell = false;
-            this.logFastObjectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn7,
-            this.olvColumn8,
-            this.olvColumn9});
-            this.logFastObjectListView.Cursor = System.Windows.Forms.Cursors.Default;
-            this.logFastObjectListView.FullRowSelect = true;
-            this.logFastObjectListView.GridLines = true;
-            this.logFastObjectListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.logFastObjectListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.logFastObjectListView.Location = new System.Drawing.Point(6, 20);
-            this.logFastObjectListView.Name = "logFastObjectListView";
-            this.logFastObjectListView.ShowGroups = false;
-            this.logFastObjectListView.Size = new System.Drawing.Size(748, 142);
-            this.logFastObjectListView.TabIndex = 0;
-            this.logFastObjectListView.UseCompatibleStateImageBehavior = false;
-            this.logFastObjectListView.View = System.Windows.Forms.View.Details;
-            this.logFastObjectListView.VirtualMode = true;
-            // 
-            // olvColumn7
-            // 
-            this.olvColumn7.Text = "Time";
-            this.olvColumn7.Width = 100;
-            // 
-            // olvColumn8
-            // 
-            this.olvColumn8.Text = "Severity";
-            // 
-            // olvColumn9
-            // 
-            this.olvColumn9.Text = "Description";
-            this.olvColumn9.Width = 584;
-            // 
-            // internetDataListView
-            // 
-            this.internetDataListView.CellEditUseWholeCell = false;
-            this.internetDataListView.DataSource = null;
-            this.internetDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.internetDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.internetDataListView.Location = new System.Drawing.Point(6, 6);
-            this.internetDataListView.Name = "internetDataListView";
-            this.internetDataListView.Size = new System.Drawing.Size(168, 271);
-            this.internetDataListView.TabIndex = 0;
-            this.internetDataListView.UseCompatibleStateImageBehavior = false;
-            this.internetDataListView.View = System.Windows.Forms.View.Details;
-            // 
-            // lanDataListView
-            // 
-            this.lanDataListView.CellEditUseWholeCell = false;
-            this.lanDataListView.DataSource = null;
-            this.lanDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.lanDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.lanDataListView.Location = new System.Drawing.Point(6, 6);
-            this.lanDataListView.Name = "lanDataListView";
-            this.lanDataListView.Size = new System.Drawing.Size(168, 271);
-            this.lanDataListView.TabIndex = 1;
-            this.lanDataListView.UseCompatibleStateImageBehavior = false;
-            this.lanDataListView.View = System.Windows.Forms.View.Details;
-            // 
-            // browseFolderDataTreeListView
-            // 
-            this.browseFolderDataTreeListView.CellEditUseWholeCell = false;
-            this.browseFolderDataTreeListView.DataSource = null;
-            this.browseFolderDataTreeListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.browseFolderDataTreeListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.browseFolderDataTreeListView.Location = new System.Drawing.Point(6, 6);
-            this.browseFolderDataTreeListView.Name = "browseFolderDataTreeListView";
-            this.browseFolderDataTreeListView.RootKeyValueString = "";
-            this.browseFolderDataTreeListView.ShowGroups = false;
-            this.browseFolderDataTreeListView.Size = new System.Drawing.Size(185, 319);
-            this.browseFolderDataTreeListView.TabIndex = 0;
-            this.browseFolderDataTreeListView.UseCompatibleStateImageBehavior = false;
-            this.browseFolderDataTreeListView.View = System.Windows.Forms.View.Details;
-            this.browseFolderDataTreeListView.VirtualMode = true;
-            // 
-            // browseFilesDataListView
-            // 
-            this.browseFilesDataListView.CellEditUseWholeCell = false;
-            this.browseFilesDataListView.DataSource = null;
-            this.browseFilesDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.browseFilesDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.browseFilesDataListView.Location = new System.Drawing.Point(198, 6);
-            this.browseFilesDataListView.Name = "browseFilesDataListView";
-            this.browseFilesDataListView.Size = new System.Drawing.Size(341, 319);
-            this.browseFilesDataListView.TabIndex = 1;
-            this.browseFilesDataListView.UseCompatibleStateImageBehavior = false;
-            this.browseFilesDataListView.View = System.Windows.Forms.View.Details;
+            this.inputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.inputErrorProvider.ContainerControl = this;
+            this.inputErrorProvider.RightToLeft = true;
             // 
             // MainView
             // 
@@ -514,27 +524,30 @@
             this.Controls.Add(this.peersGroupBox);
             this.Name = "MainView";
             this.Text = "KKShare v0.1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainView_Closing);
+            this.Load += new System.EventHandler(this.MainView_Load);
             this.peersGroupBox.ResumeLayout(false);
             this.peersTabs.ResumeLayout(false);
             this.lanTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).EndInit();
             this.internetTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).EndInit();
             this.logGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logFastObjectListView)).EndInit();
             this.mainTabs.ResumeLayout(false);
             this.browseTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).EndInit();
             this.downloadTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.downloadsTreeListView)).EndInit();
             this.uploadTabPage.ResumeLayout(false);
-            this.settingsTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uploadsTreeListView)).EndInit();
-            this.networkGroupBox.ResumeLayout(false);
-            this.networkGroupBox.PerformLayout();
+            this.settingsTabPage.ResumeLayout(false);
             this.sharedGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logFastObjectListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).EndInit();
+            this.networkGroupBox.ResumeLayout(false);
+            this.networkGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -581,6 +594,7 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private BrightIdeasSoftware.DataListView browseFilesDataListView;
         private BrightIdeasSoftware.DataTreeListView browseFolderDataTreeListView;
+        private System.Windows.Forms.ErrorProvider inputErrorProvider;
     }
 }
 

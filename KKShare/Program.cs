@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using KKShare.Data;
+using KKShare.Controllers;
+
 namespace KKShare
 {
     static class Program
@@ -18,12 +21,12 @@ namespace KKShare
             Application.SetCompatibleTextRenderingDefault(false);
 
             // setup MVC
-            MainView view = new MainView();
-            //Model model = new Model();
-            //Controller controller = new Controller(model, view);
+            MainView mainView = new MainView();
+            Settings settings = new Settings();
+            SettingsController settingsController = new SettingsController(settings, mainView);
 
             // run
-            Application.Run(view);
+            Application.Run(mainView);
         }
     }
 }
