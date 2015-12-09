@@ -16,5 +16,9 @@ namespace KKShare.Data
         public const string SETTINGS_FILE_ROOT_NAME = "Settings";
         public const string SETTINGS_FILE_NETWORK_NAME = "Network";
         public const string SETTINGS_FILE_NAME_NAME = "Name";
+
+        // logging
+        public const string LOG_DATETIME_FORMAT = "HH:mm:ss (dd-MM-yyyy)";
+
     }
 }

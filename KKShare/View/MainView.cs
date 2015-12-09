@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using KKShare.Controllers;
+using KKShare.Data;
 
 namespace KKShare
 {
@@ -29,6 +30,7 @@ namespace KKShare
         {
             settingsController.LoadSettings();
             // TODO: LAN-Discovery
+            Log.Instance.AddMessage(Severity.Info, "Searching for other PCs on LAN...");
         }
 
         private void MainView_Closing(object sender, FormClosingEventArgs e)
@@ -37,6 +39,9 @@ namespace KKShare
             // TODO: Close open connections etc...
         }
 
+        /// <summary>
+        /// Validates the user input for the <code>Name</code>. Triggered through an event.
+        /// </summary>
         private void TextBoxName_Validating(object sender, CancelEventArgs e)
         {
             switch (inputValidator.ValidateName(nameTextBox.Text))
@@ -49,7 +54,19 @@ namespace KKShare
                 default:
                     inputErrorProvider.Clear();
                     settingsController.SetName(nameTextBox.Text);
+                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to " + nameTextBox.Text + ".");
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Forces a focus change (to initiate validation).
+        /// </summary>
+        private void TextBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                (sender as TextBox).Parent.Focus();
             }
         }
 
@@ -68,6 +85,7 @@ namespace KKShare
         void Observer.Update()
         {
             nameTextBox.Text = settingsController.GetName();
+            logFastObjectListView.SetObjects(Log.Instance.List);
         }
     }
 

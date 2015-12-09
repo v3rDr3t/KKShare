@@ -193,6 +193,8 @@
             // 
             // logGroupBox
             // 
+            this.logGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.logGroupBox.Controls.Add(this.logFastObjectListView);
             this.logGroupBox.Location = new System.Drawing.Point(12, 381);
             this.logGroupBox.Name = "logGroupBox";
@@ -206,6 +208,8 @@
             this.logFastObjectListView.AllColumns.Add(this.olvColumn7);
             this.logFastObjectListView.AllColumns.Add(this.olvColumn8);
             this.logFastObjectListView.AllColumns.Add(this.olvColumn9);
+            this.logFastObjectListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.logFastObjectListView.CellEditUseWholeCell = false;
             this.logFastObjectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn7,
@@ -227,20 +231,25 @@
             // 
             // olvColumn7
             // 
+            this.olvColumn7.AspectName = "Time";
             this.olvColumn7.Text = "Time";
-            this.olvColumn7.Width = 100;
+            this.olvColumn7.Width = 120;
             // 
             // olvColumn8
             // 
+            this.olvColumn8.AspectName = "Severity";
             this.olvColumn8.Text = "Severity";
             // 
             // olvColumn9
             // 
+            this.olvColumn9.AspectName = "Description";
             this.olvColumn9.Text = "Description";
-            this.olvColumn9.Width = 584;
+            this.olvColumn9.Width = 564;
             // 
             // mainTabs
             // 
+            this.mainTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainTabs.Controls.Add(this.browseTabPage);
             this.mainTabs.Controls.Add(this.downloadTabPage);
             this.mainTabs.Controls.Add(this.uploadTabPage);
@@ -506,6 +515,7 @@
             this.nameTextBox.Size = new System.Drawing.Size(142, 20);
             this.nameTextBox.TabIndex = 3;
             this.nameTextBox.Text = "...";
+            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxName_KeyPress);
             this.nameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxName_Validating);
             // 
             // inputErrorProvider

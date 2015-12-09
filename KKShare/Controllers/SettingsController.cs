@@ -23,6 +23,7 @@ namespace KKShare.Controllers
 
             mainView.AddSettingsController(this);
             this.settings.Attach(mainView);
+            Log.Instance.Attach(mainView);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace KKShare.Controllers
             }
             else
             {
-                // TODO: Write info to log ("not found. use default!")
+                Log.Instance.AddMessage(Severity.Info, "No settings file found. Loading default settings.");
             }
         }
 
