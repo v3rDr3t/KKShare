@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using KKShare.Controllers;
 using KKShare.Data;
+using KKShare.Discovery;
 
 namespace KKShare
 {
@@ -17,20 +19,27 @@ namespace KKShare
     {
         private SettingsController settingsController;
         private InputValidator inputValidator;
+        
+        private DiscoveryReceiver discoveryRcv;
+        private DiscoverySender discoverySnd;
 
         public MainView()
         {
             InitializeComponent();
 
             inputValidator = new InputValidator();
+            discoveryRcv = new DiscoveryReceiver();
+            discoverySnd = new DiscoverySender();
         }
 
 
         private void MainView_Load(object sender, EventArgs e)
         {
             settingsController.LoadSettings();
-            // TODO: LAN-Discovery
+
             Log.Instance.AddMessage(Severity.Info, "Searching for other PCs on LAN...");
+            discoveryRcv.StartReceiving();
+            discoverySnd.StartSending();
         }
 
         private void MainView_Closing(object sender, FormClosingEventArgs e)
@@ -77,6 +86,17 @@ namespace KKShare
         public void AddSettingsController(SettingsController controller)
         {
             this.settingsController = controller;
+        }
+
+        /// <summary>
+        /// Autoscrolls to the bottom item when items change. Triggered through an event.
+        /// </summary>
+        private void Log_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
+        {
+            if (logFastObjectListView.GetItemCount() > 0)
+            {
+                logFastObjectListView.EnsureVisible(logFastObjectListView.GetItemCount() - 1);
+            }
         }
 
         /// <summary>

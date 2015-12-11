@@ -48,14 +48,6 @@ namespace KKShare.Data
             get { return logInstance; }
         }
 
-        public void printLog()
-        {
-            foreach (var logMessage in log)
-            {
-                Console.WriteLine("Log> " + logMessage.ToString());
-            }
-        }
-
         public List<LogMessage> List
         {
             get { return log; }
@@ -78,11 +70,6 @@ namespace KKShare.Data
             this.dateTime = DateTime.Now;
             this.severity = severity;
             this.description = description;
-        }
-
-        public override string ToString()
-        {
-            return Time + " | " + severity.ToString() + " | " + description;
         }
 
         #region Field Getters

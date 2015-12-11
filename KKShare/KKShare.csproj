@@ -53,6 +53,8 @@
     <Compile Include="Data\Log.cs" />
     <Compile Include="Data\Observable.cs" />
     <Compile Include="Data\Settings.cs" />
+    <Compile Include="Discovery\DiscoveryReceiver.cs" />
+    <Compile Include="Discovery\DiscoverySender.cs" />
     <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>

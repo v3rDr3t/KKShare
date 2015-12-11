@@ -228,6 +228,7 @@
             this.logFastObjectListView.UseCompatibleStateImageBehavior = false;
             this.logFastObjectListView.View = System.Windows.Forms.View.Details;
             this.logFastObjectListView.VirtualMode = true;
+            this.logFastObjectListView.ItemsChanged += new System.EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(this.Log_ItemsChanged);
             // 
             // olvColumn7
             // 
