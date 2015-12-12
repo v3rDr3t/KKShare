@@ -15,7 +15,7 @@ using KKShare.Announcement;
 
 namespace KKShare
 {
-    public partial class MainView : Form, Observer
+    public partial class MainView : Form
     {
         private SettingsController settingsController;
         private CommController commController;
@@ -24,10 +24,15 @@ namespace KKShare
         public MainView()
         {
             InitializeComponent();
+            Log.Instance.PropertyChanged += new PropertyChangedEventHandler(logPropertyChanged);
 
             inputValidator = new InputValidator();
         }
 
+        private void logPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            UpdateProperty(e.PropertyName);
+        }
 
         private void MainView_Load(object sender, EventArgs e)
         {
@@ -104,28 +109,22 @@ namespace KKShare
         }
 
         /// <summary>
-        /// Updates the main view according to data settings./>
+        /// Updates the main view according to given property./>
         /// </summary>
-        void Observer.Update()
+        internal void UpdateProperty(string propertyName)
         {
-            nameTextBox.Text = settingsController.GetName();
-            logFastObjectListView.SetObjects(Log.Instance.List);
+            switch (propertyName)
+            {
+                case Constants.PROP_NAME_SETTINGS_NAME:
+                    nameTextBox.Text = settingsController.GetName();
+                    break;
+                case Constants.PROP_NAME_LOG:
+                    logFastObjectListView.SetObjects(Log.Instance.List);
+                    break;
+
+                default:
+                    break;
+            }
         }
-
-        private void Downloads_Enter(object sender, EventArgs e)
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// An abstract observer.
-    /// </summary>
-    public interface Observer
-    {
-        /// <summary>
-        /// Updates the respective view elements.
-        /// </summary>
-        void Update();
     }
 }

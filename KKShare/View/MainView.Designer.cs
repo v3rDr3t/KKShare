@@ -1,4 +1,6 @@
-﻿namespace KKShare
+﻿using System;
+
+namespace KKShare
 {
     partial class MainView
     {
@@ -30,6 +32,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.peersGroupBox = new System.Windows.Forms.GroupBox();
+            this.editPeersButton = new System.Windows.Forms.Button();
             this.addPeerButton = new System.Windows.Forms.Button();
             this.RemovePeerButton = new System.Windows.Forms.Button();
             this.refreshPeersButton = new System.Windows.Forms.Button();
@@ -47,6 +50,13 @@
             this.browseTabPage = new System.Windows.Forms.TabPage();
             this.browseFilesDataListView = new BrightIdeasSoftware.DataListView();
             this.browseFolderDataTreeListView = new BrightIdeasSoftware.DataTreeListView();
+            this.shareTabPage = new System.Windows.Forms.TabPage();
+            this.sharedDataListView = new BrightIdeasSoftware.DataListView();
+            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.editSharedButton = new System.Windows.Forms.Button();
+            this.addSharedButton = new System.Windows.Forms.Button();
+            this.removeSharedButton = new System.Windows.Forms.Button();
             this.downloadTabPage = new System.Windows.Forms.TabPage();
             this.downloadsTreeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -58,23 +68,15 @@
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.settingsTabPage = new System.Windows.Forms.TabPage();
-            this.portLabel = new System.Windows.Forms.Label();
-            this.portTextBox = new System.Windows.Forms.TextBox();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.addSharedButton = new System.Windows.Forms.Button();
-            this.removeSharedButton = new System.Windows.Forms.Button();
-            this.sharedDataListView = new BrightIdeasSoftware.DataListView();
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.editPeersButton = new System.Windows.Forms.Button();
-            this.shareTabPage = new System.Windows.Forms.TabPage();
-            this.editSharedButton = new System.Windows.Forms.Button();
-            this.netGroupBox = new System.Windows.Forms.GroupBox();
             this.downloadsGroupBox = new System.Windows.Forms.GroupBox();
+            this.downloadsTextBox = new System.Windows.Forms.TextBox();
             this.browseDownloadsButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.netGroupBox = new System.Windows.Forms.GroupBox();
+            this.portTextBox = new System.Windows.Forms.TextBox();
+            this.portLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
@@ -87,16 +89,16 @@
             this.browseTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).BeginInit();
+            this.shareTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).BeginInit();
             this.downloadTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.downloadsTreeListView)).BeginInit();
             this.uploadTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uploadsTreeListView)).BeginInit();
             this.settingsTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
-            this.shareTabPage.SuspendLayout();
-            this.netGroupBox.SuspendLayout();
             this.downloadsGroupBox.SuspendLayout();
+            this.netGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // peersGroupBox
@@ -112,6 +114,15 @@
             this.peersGroupBox.TabIndex = 0;
             this.peersGroupBox.TabStop = false;
             this.peersGroupBox.Text = "Peers";
+            // 
+            // editPeersButton
+            // 
+            this.editPeersButton.Location = new System.Drawing.Point(74, 334);
+            this.editPeersButton.Name = "editPeersButton";
+            this.editPeersButton.Size = new System.Drawing.Size(23, 23);
+            this.editPeersButton.TabIndex = 4;
+            this.editPeersButton.Text = "E";
+            this.editPeersButton.UseVisualStyleBackColor = true;
             // 
             // addPeerButton
             // 
@@ -310,6 +321,76 @@
             this.browseFolderDataTreeListView.View = System.Windows.Forms.View.Details;
             this.browseFolderDataTreeListView.VirtualMode = true;
             // 
+            // shareTabPage
+            // 
+            this.shareTabPage.Controls.Add(this.sharedDataListView);
+            this.shareTabPage.Controls.Add(this.editSharedButton);
+            this.shareTabPage.Controls.Add(this.addSharedButton);
+            this.shareTabPage.Controls.Add(this.removeSharedButton);
+            this.shareTabPage.Location = new System.Drawing.Point(4, 22);
+            this.shareTabPage.Name = "shareTabPage";
+            this.shareTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.shareTabPage.Size = new System.Drawing.Size(545, 331);
+            this.shareTabPage.TabIndex = 4;
+            this.shareTabPage.Text = "Share";
+            this.shareTabPage.UseVisualStyleBackColor = true;
+            // 
+            // sharedDataListView
+            // 
+            this.sharedDataListView.AllColumns.Add(this.olvColumn10);
+            this.sharedDataListView.AllColumns.Add(this.olvColumn11);
+            this.sharedDataListView.CellEditUseWholeCell = false;
+            this.sharedDataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn10,
+            this.olvColumn11});
+            this.sharedDataListView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sharedDataListView.DataSource = null;
+            this.sharedDataListView.FullRowSelect = true;
+            this.sharedDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.Location = new System.Drawing.Point(6, 6);
+            this.sharedDataListView.Name = "sharedDataListView";
+            this.sharedDataListView.Size = new System.Drawing.Size(533, 294);
+            this.sharedDataListView.TabIndex = 0;
+            this.sharedDataListView.UseCompatibleStateImageBehavior = false;
+            this.sharedDataListView.View = System.Windows.Forms.View.Details;
+            // 
+            // olvColumn10
+            // 
+            this.olvColumn10.Text = "Folder";
+            this.olvColumn10.Width = 465;
+            // 
+            // olvColumn11
+            // 
+            this.olvColumn11.Text = "Files";
+            // 
+            // editSharedButton
+            // 
+            this.editSharedButton.Location = new System.Drawing.Point(64, 306);
+            this.editSharedButton.Name = "editSharedButton";
+            this.editSharedButton.Size = new System.Drawing.Size(23, 23);
+            this.editSharedButton.TabIndex = 5;
+            this.editSharedButton.Text = "E";
+            this.editSharedButton.UseVisualStyleBackColor = true;
+            // 
+            // addSharedButton
+            // 
+            this.addSharedButton.Location = new System.Drawing.Point(6, 306);
+            this.addSharedButton.Name = "addSharedButton";
+            this.addSharedButton.Size = new System.Drawing.Size(23, 23);
+            this.addSharedButton.TabIndex = 1;
+            this.addSharedButton.Text = "+";
+            this.addSharedButton.UseVisualStyleBackColor = true;
+            // 
+            // removeSharedButton
+            // 
+            this.removeSharedButton.Location = new System.Drawing.Point(35, 306);
+            this.removeSharedButton.Name = "removeSharedButton";
+            this.removeSharedButton.Size = new System.Drawing.Size(23, 23);
+            this.removeSharedButton.TabIndex = 2;
+            this.removeSharedButton.Text = "-";
+            this.removeSharedButton.UseVisualStyleBackColor = true;
+            // 
             // downloadTabPage
             // 
             this.downloadTabPage.Controls.Add(this.downloadsTreeListView);
@@ -418,127 +499,32 @@
             this.settingsTabPage.Text = "Settings";
             this.settingsTabPage.UseVisualStyleBackColor = true;
             // 
-            // portLabel
+            // downloadsGroupBox
             // 
-            this.portLabel.AutoSize = true;
-            this.portLabel.Location = new System.Drawing.Point(6, 22);
-            this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(29, 13);
-            this.portLabel.TabIndex = 0;
-            this.portLabel.Text = "Port:";
+            this.downloadsGroupBox.Controls.Add(this.downloadsTextBox);
+            this.downloadsGroupBox.Controls.Add(this.browseDownloadsButton);
+            this.downloadsGroupBox.Location = new System.Drawing.Point(6, 93);
+            this.downloadsGroupBox.Name = "downloadsGroupBox";
+            this.downloadsGroupBox.Size = new System.Drawing.Size(533, 54);
+            this.downloadsGroupBox.TabIndex = 5;
+            this.downloadsGroupBox.TabStop = false;
+            this.downloadsGroupBox.Text = "Downloads";
             // 
-            // portTextBox
+            // downloadsTextBox
             // 
-            this.portTextBox.Enabled = false;
-            this.portTextBox.Location = new System.Drawing.Point(70, 19);
-            this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(142, 20);
-            this.portTextBox.TabIndex = 1;
-            this.portTextBox.Text = "51010";
+            this.downloadsTextBox.Location = new System.Drawing.Point(9, 20);
+            this.downloadsTextBox.Name = "downloadsTextBox";
+            this.downloadsTextBox.Size = new System.Drawing.Size(482, 20);
+            this.downloadsTextBox.TabIndex = 1;
             // 
-            // nameLabel
+            // browseDownloadsButton
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(6, 48);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(38, 13);
-            this.nameLabel.TabIndex = 2;
-            this.nameLabel.Text = "Name:";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(70, 45);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(142, 20);
-            this.nameTextBox.TabIndex = 3;
-            this.nameTextBox.Text = "...";
-            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxName_KeyPress);
-            this.nameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxName_Validating);
-            // 
-            // addSharedButton
-            // 
-            this.addSharedButton.Location = new System.Drawing.Point(6, 306);
-            this.addSharedButton.Name = "addSharedButton";
-            this.addSharedButton.Size = new System.Drawing.Size(23, 23);
-            this.addSharedButton.TabIndex = 1;
-            this.addSharedButton.Text = "+";
-            this.addSharedButton.UseVisualStyleBackColor = true;
-            // 
-            // removeSharedButton
-            // 
-            this.removeSharedButton.Location = new System.Drawing.Point(35, 306);
-            this.removeSharedButton.Name = "removeSharedButton";
-            this.removeSharedButton.Size = new System.Drawing.Size(23, 23);
-            this.removeSharedButton.TabIndex = 2;
-            this.removeSharedButton.Text = "-";
-            this.removeSharedButton.UseVisualStyleBackColor = true;
-            // 
-            // sharedDataListView
-            // 
-            this.sharedDataListView.AllColumns.Add(this.olvColumn10);
-            this.sharedDataListView.AllColumns.Add(this.olvColumn11);
-            this.sharedDataListView.CellEditUseWholeCell = false;
-            this.sharedDataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn10,
-            this.olvColumn11});
-            this.sharedDataListView.Cursor = System.Windows.Forms.Cursors.Default;
-            this.sharedDataListView.DataSource = null;
-            this.sharedDataListView.FullRowSelect = true;
-            this.sharedDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.sharedDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.sharedDataListView.Location = new System.Drawing.Point(6, 6);
-            this.sharedDataListView.Name = "sharedDataListView";
-            this.sharedDataListView.Size = new System.Drawing.Size(533, 294);
-            this.sharedDataListView.TabIndex = 0;
-            this.sharedDataListView.UseCompatibleStateImageBehavior = false;
-            this.sharedDataListView.View = System.Windows.Forms.View.Details;
-            // 
-            // olvColumn10
-            // 
-            this.olvColumn10.Text = "Folder";
-            this.olvColumn10.Width = 465;
-            // 
-            // olvColumn11
-            // 
-            this.olvColumn11.Text = "Files";
-            // 
-            // inputErrorProvider
-            // 
-            this.inputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.inputErrorProvider.ContainerControl = this;
-            this.inputErrorProvider.RightToLeft = true;
-            // 
-            // editPeersButton
-            // 
-            this.editPeersButton.Location = new System.Drawing.Point(74, 334);
-            this.editPeersButton.Name = "editPeersButton";
-            this.editPeersButton.Size = new System.Drawing.Size(23, 23);
-            this.editPeersButton.TabIndex = 4;
-            this.editPeersButton.Text = "E";
-            this.editPeersButton.UseVisualStyleBackColor = true;
-            // 
-            // shareTabPage
-            // 
-            this.shareTabPage.Controls.Add(this.sharedDataListView);
-            this.shareTabPage.Controls.Add(this.editSharedButton);
-            this.shareTabPage.Controls.Add(this.addSharedButton);
-            this.shareTabPage.Controls.Add(this.removeSharedButton);
-            this.shareTabPage.Location = new System.Drawing.Point(4, 22);
-            this.shareTabPage.Name = "shareTabPage";
-            this.shareTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.shareTabPage.Size = new System.Drawing.Size(545, 331);
-            this.shareTabPage.TabIndex = 4;
-            this.shareTabPage.Text = "Share";
-            this.shareTabPage.UseVisualStyleBackColor = true;
-            // 
-            // editSharedButton
-            // 
-            this.editSharedButton.Location = new System.Drawing.Point(64, 306);
-            this.editSharedButton.Name = "editSharedButton";
-            this.editSharedButton.Size = new System.Drawing.Size(23, 23);
-            this.editSharedButton.TabIndex = 5;
-            this.editSharedButton.Text = "E";
-            this.editSharedButton.UseVisualStyleBackColor = true;
+            this.browseDownloadsButton.Location = new System.Drawing.Point(497, 19);
+            this.browseDownloadsButton.Name = "browseDownloadsButton";
+            this.browseDownloadsButton.Size = new System.Drawing.Size(30, 22);
+            this.browseDownloadsButton.TabIndex = 0;
+            this.browseDownloadsButton.Text = "...";
+            this.browseDownloadsButton.UseVisualStyleBackColor = true;
             // 
             // netGroupBox
             // 
@@ -553,32 +539,48 @@
             this.netGroupBox.TabStop = false;
             this.netGroupBox.Text = "Network";
             // 
-            // downloadsGroupBox
+            // portTextBox
             // 
-            this.downloadsGroupBox.Controls.Add(this.textBox1);
-            this.downloadsGroupBox.Controls.Add(this.browseDownloadsButton);
-            this.downloadsGroupBox.Location = new System.Drawing.Point(6, 93);
-            this.downloadsGroupBox.Name = "downloadsGroupBox";
-            this.downloadsGroupBox.Size = new System.Drawing.Size(533, 54);
-            this.downloadsGroupBox.TabIndex = 5;
-            this.downloadsGroupBox.TabStop = false;
-            this.downloadsGroupBox.Text = "Downloads";
+            this.portTextBox.Enabled = false;
+            this.portTextBox.Location = new System.Drawing.Point(70, 19);
+            this.portTextBox.Name = "portTextBox";
+            this.portTextBox.Size = new System.Drawing.Size(142, 20);
+            this.portTextBox.TabIndex = 1;
+            this.portTextBox.Text = "51010";
             // 
-            // browseDownloadsButton
+            // portLabel
             // 
-            this.browseDownloadsButton.Location = new System.Drawing.Point(497, 19);
-            this.browseDownloadsButton.Name = "browseDownloadsButton";
-            this.browseDownloadsButton.Size = new System.Drawing.Size(30, 22);
-            this.browseDownloadsButton.TabIndex = 0;
-            this.browseDownloadsButton.Text = "...";
-            this.browseDownloadsButton.UseVisualStyleBackColor = true;
+            this.portLabel.AutoSize = true;
+            this.portLabel.Location = new System.Drawing.Point(6, 22);
+            this.portLabel.Name = "portLabel";
+            this.portLabel.Size = new System.Drawing.Size(29, 13);
+            this.portLabel.TabIndex = 0;
+            this.portLabel.Text = "Port:";
             // 
-            // textBox1
+            // nameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(482, 20);
-            this.textBox1.TabIndex = 1;
+            this.nameTextBox.Location = new System.Drawing.Point(70, 45);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(142, 20);
+            this.nameTextBox.TabIndex = 3;
+            this.nameTextBox.Text = "...";
+            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxName_KeyPress);
+            this.nameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxName_Validating);
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(6, 48);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.nameLabel.TabIndex = 2;
+            this.nameLabel.Text = "Name:";
+            // 
+            // inputErrorProvider
+            // 
+            this.inputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.inputErrorProvider.ContainerControl = this;
+            this.inputErrorProvider.RightToLeft = true;
             // 
             // MainView
             // 
@@ -604,22 +606,21 @@
             this.browseTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.browseFilesDataListView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.browseFolderDataTreeListView)).EndInit();
+            this.shareTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).EndInit();
             this.downloadTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.downloadsTreeListView)).EndInit();
             this.uploadTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uploadsTreeListView)).EndInit();
             this.settingsTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sharedDataListView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
-            this.shareTabPage.ResumeLayout(false);
-            this.netGroupBox.ResumeLayout(false);
-            this.netGroupBox.PerformLayout();
             this.downloadsGroupBox.ResumeLayout(false);
             this.downloadsGroupBox.PerformLayout();
+            this.netGroupBox.ResumeLayout(false);
+            this.netGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
-
         #endregion
 
         private System.Windows.Forms.GroupBox peersGroupBox;
@@ -665,7 +666,7 @@
         private System.Windows.Forms.TabPage shareTabPage;
         private System.Windows.Forms.Button editSharedButton;
         private System.Windows.Forms.GroupBox downloadsGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox downloadsTextBox;
         private System.Windows.Forms.Button browseDownloadsButton;
         private System.Windows.Forms.GroupBox netGroupBox;
     }

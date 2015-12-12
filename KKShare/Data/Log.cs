@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KKShare.Data
 {
-    public enum Severity
+    internal enum Severity
     {
         Debug = 0,
         Info = 1,
@@ -14,10 +15,12 @@ namespace KKShare.Data
         Error = 3
     };
 
-    public class Log : Observable
+    internal class Log : INotifyPropertyChanged
     {
         private static readonly Log logInstance = new Log();
         private List<LogMessage> log;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         static Log(){ }
 
@@ -37,7 +40,7 @@ namespace KKShare.Data
         public void AddMessage(Severity severity, string description)
         {
             log.Add(new LogMessage(severity, description));
-            Notify();
+            PropertyChanged(this, new PropertyChangedEventArgs(Constants.PROP_NAME_LOG));
         }
 
         /// <summary>
@@ -48,13 +51,15 @@ namespace KKShare.Data
             get { return logInstance; }
         }
 
+        #region Field Getters
         public List<LogMessage> List
         {
             get { return log; }
         }
+        #endregion
     }
 
-    public class LogMessage
+    internal class LogMessage
     {
         private DateTime dateTime;
         private Severity severity;
@@ -65,7 +70,7 @@ namespace KKShare.Data
         /// </summary>
         /// <param name="severity">The log message severity.</param>
         /// <param name="description">The log message description.</param>
-        public LogMessage(Severity severity, string description)
+        internal LogMessage(Severity severity, string description)
         {
             this.dateTime = DateTime.Now;
             this.severity = severity;

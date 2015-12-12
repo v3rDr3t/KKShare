@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KKShare.Data;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace KKShare.Controllers
 {
@@ -22,8 +24,12 @@ namespace KKShare.Controllers
             this.settingsFileHandler = new SettingsFileHandler();
 
             mainView.AddSettingsController(this);
-            this.settings.Attach(mainView);
-            Log.Instance.Attach(mainView);
+            settings.PropertyChanged += new PropertyChangedEventHandler(settingsPropertyChanged);
+        }
+        
+        private void settingsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            mainView.UpdateProperty(e.PropertyName);
         }
 
         /// <summary>
@@ -52,6 +58,14 @@ namespace KKShare.Controllers
             // ...
             settingsFileHandler.CreateSettingsFile(name);
         }
+
+        //private void OnPropertyChanged(object sender, PropertyChangeEventArg e)
+        //{
+        //    if (e.PropertyName == "SettingsName")
+        //    {
+        //        // ...
+        //    }
+        //}
 
         internal string GetName()
         {

@@ -24,5 +24,10 @@ namespace KKShare.Data
         // logging
         public const string LOG_DATETIME_FORMAT = "HH:mm:ss (dd-MM-yyyy)";
 
+        // property names
+        public const string PROP_NAME_SETTINGS_NAME = "SettingsName";
+        public const string PROP_NAME_LOG = "Log";
+
+
     }
 }
