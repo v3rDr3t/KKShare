@@ -11,35 +11,33 @@ using System.Windows.Forms;
 
 using KKShare.Controllers;
 using KKShare.Data;
-using KKShare.Discovery;
+using KKShare.Announcement;
 
 namespace KKShare
 {
-    public partial class MainView : Form, Observer
+    public partial class MainView : Form
     {
         private SettingsController settingsController;
+        private CommController commController;
         private InputValidator inputValidator;
-        
-        private DiscoveryReceiver discoveryRcv;
-        private DiscoverySender discoverySnd;
 
         public MainView()
         {
             InitializeComponent();
+            Log.Instance.PropertyChanged += new PropertyChangedEventHandler(logPropertyChanged);
 
             inputValidator = new InputValidator();
-            discoveryRcv = new DiscoveryReceiver();
-            discoverySnd = new DiscoverySender();
         }
 
+        private void logPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            UpdateProperty(e.PropertyName);
+        }
 
         private void MainView_Load(object sender, EventArgs e)
         {
             settingsController.LoadSettings();
-
-            Log.Instance.AddMessage(Severity.Info, "Searching for other PCs on LAN...");
-            discoveryRcv.StartReceiving();
-            discoverySnd.StartSending();
+            commController.StartAnnouncementService();
         }
 
         private void MainView_Closing(object sender, FormClosingEventArgs e)
@@ -56,14 +54,16 @@ namespace KKShare
             switch (inputValidator.ValidateName(nameTextBox.Text))
             {
                 case NameResults.Error:
-                    inputErrorProvider.SetError(nameTextBox, "Invalid name!");
+                    inputErrorProvider.SetError(nameTextBox,
+                        "Invalid name!");
                     e.Cancel = true;
                     break;
 
                 default:
                     inputErrorProvider.Clear();
                     settingsController.SetName(nameTextBox.Text);
-                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to " + nameTextBox.Text + ".");
+                    Log.Instance.AddMessage(Severity.Debug,
+                        "Changed PC name to " + nameTextBox.Text + ".");
                     break;
             }
         }
@@ -83,9 +83,18 @@ namespace KKShare
         /// Adds the given <see cref="SettingsController"/> to the main view.
         /// </summary>
         /// <param name="controller">The given controller.</param>
-        public void AddSettingsController(SettingsController controller)
+        internal void AddSettingsController(SettingsController controller)
         {
             this.settingsController = controller;
+        }
+
+        /// <summary>
+        /// Adds the given <see cref="CommController"/> to the main view.
+        /// </summary>
+        /// <param name="controller">The given controller.</param>
+        internal void AddCommController(CommController controller)
+        {
+            this.commController = controller;
         }
 
         /// <summary>
@@ -100,23 +109,22 @@ namespace KKShare
         }
 
         /// <summary>
-        /// Updates the main view according to data settings./>
+        /// Updates the main view according to given property./>
         /// </summary>
-        void Observer.Update()
+        internal void UpdateProperty(string propertyName)
         {
-            nameTextBox.Text = settingsController.GetName();
-            logFastObjectListView.SetObjects(Log.Instance.List);
-        }
-    }
+            switch (propertyName)
+            {
+                case Constants.PROP_NAME_SETTINGS_NAME:
+                    nameTextBox.Text = settingsController.GetName();
+                    break;
+                case Constants.PROP_NAME_LOG:
+                    logFastObjectListView.SetObjects(Log.Instance.List);
+                    break;
 
-    /// <summary>
-    /// An abstract observer.
-    /// </summary>
-    public interface Observer
-    {
-        /// <summary>
-        /// Updates the respective view elements.
-        /// </summary>
-        void Update();
+                default:
+                    break;
+            }
+        }
     }
 }

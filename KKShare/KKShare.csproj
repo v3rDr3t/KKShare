@@ -50,15 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CommController.cs" />
     <Compile Include="Controllers\InputValidator.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SettingsFileHandler.cs" />
     <Compile Include="Data\Constants.cs" />
     <Compile Include="Data\Log.cs" />
-    <Compile Include="Data\Observable.cs" />
     <Compile Include="Data\Settings.cs" />
-    <Compile Include="Discovery\DiscoveryReceiver.cs" />
-    <Compile Include="Discovery\DiscoverySender.cs" />
+    <Compile Include="Announcement\AnnReceiver.cs" />
+    <Compile Include="Announcement\AnnSender.cs" />
+    <Compile Include="Announcement\UDPMessage.cs" />
     <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\KKShare.Data.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

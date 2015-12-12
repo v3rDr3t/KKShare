@@ -9,23 +9,20 @@ using System.Threading.Tasks;
 
 using KKShare.Data;
 
-namespace KKShare.Discovery
+namespace KKShare.Announcement
 {
-    public class DiscoveryReceiver
+    public class AnnReceiver
     {
-        private Thread discoveryRcvThread;
-        private DiscoveryReceiverWorker worker;
-
-        public DiscoveryReceiver()
-        {
-        }
+        private Thread annRcvThread;
+        private AnnReceiveWorker worker;
 
         internal void StartReceiving()
         {
-            worker = new DiscoveryReceiverWorker();
-            discoveryRcvThread = new Thread(worker.Start);
-            discoveryRcvThread.IsBackground = true;
-            discoveryRcvThread.Start();
+            worker = new AnnReceiveWorker();
+            annRcvThread = new Thread(worker.Start);
+            annRcvThread.Name = "AnnReceiver";
+            annRcvThread.IsBackground = true;
+            annRcvThread.Start();
         }
 
         internal void StopReceiving()
@@ -34,20 +31,20 @@ namespace KKShare.Discovery
         }
     }
 
-    public class DiscoveryReceiverWorker
+    public class AnnReceiveWorker
     {
         private UdpClient udpClient;
-        private IPEndPoint incomingIP;
+        private IPEndPoint remoteEP;
         private int running;
 
-        public DiscoveryReceiverWorker()
+        public AnnReceiveWorker()
         {
             udpClient = new UdpClient();
-            incomingIP = new IPEndPoint(IPAddress.Any, Constants.DEFAULT_PORT);
+            remoteEP = new IPEndPoint(IPAddress.Any, Constants.DEFAULT_PORT);
 
             udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             udpClient.ExclusiveAddressUse = false;
-            udpClient.Client.Bind(incomingIP);
+            udpClient.Client.Bind(remoteEP);
 
             IPAddress multicastAddress = IPAddress.Parse(Constants.MULTICAST_ADDRESS);
             udpClient.JoinMulticastGroup(multicastAddress);
@@ -58,11 +55,22 @@ namespace KKShare.Discovery
         {
             while (running == 1)
             {
-                byte[] buffer = udpClient.Receive(ref incomingIP);
-                string helloString = Encoding.Unicode.GetString(buffer);
-                if (!isLocalIpAddress(incomingIP.Address.ToString()))
+                byte[] buffer = udpClient.Receive(ref remoteEP);
+                UDPMessage msg = new UDPMessage(buffer);
+                if (!isLocalIpAddress(remoteEP.Address.ToString()))
                 {
-                    Log.Instance.AddMessage(Severity.Info, "Received: " + helloString + " from " + incomingIP.Address.ToString());
+                    switch (msg.Type)
+                    {
+                        case UDPMsgType.Announce:
+                            Log.Instance.AddMessage(Severity.Debug,
+                                msg.Text + " (" + remoteEP.Address.ToString() + ") announced itself.");
+                            break;
+
+                        default:
+                            Log.Instance.AddMessage(Severity.Warning,
+                                "An invalid UDP message was received and therefor ignored!");
+                            break;
+                    }
                 }
             }
         }

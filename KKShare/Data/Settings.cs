@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KKShare.Data
 {
-    public class Settings : Observable
+    public class Settings : INotifyPropertyChanged
+
     {
         private int port;
         private string name;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Default constructor.
@@ -22,8 +26,25 @@ namespace KKShare.Data
 
         internal void SetName(string name, bool updateView)
         {
-            this.name = name;
-            if (updateView) Notify();
+            if (updateView)
+            {
+                Set(Constants.PROP_NAME_SETTINGS_NAME, ref this.name, name);
+            }
+            else
+            {
+                this.name = name;
+            }
+        }
+
+        internal bool Set<T>(string propertyName, ref T field, T value)
+        {
+            if (field == null || EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            return true;
         }
 
         #region Field Getters
