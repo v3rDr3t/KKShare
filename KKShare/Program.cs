@@ -20,10 +20,11 @@ namespace KKShare
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // setup MVC
+            // setup core components
             MainView mainView = new MainView();
             Settings settings = new Settings();
             SettingsController settingsController = new SettingsController(settings, mainView);
+            CommController commController = new CommController(settings, mainView);
 
             // run
             Application.Run(mainView);
