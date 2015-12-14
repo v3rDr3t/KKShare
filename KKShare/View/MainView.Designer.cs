@@ -150,6 +150,7 @@ namespace KKShare
             this.refreshPeersButton.TabIndex = 3;
             this.refreshPeersButton.Text = "R";
             this.refreshPeersButton.UseVisualStyleBackColor = true;
+            this.refreshPeersButton.Click += new System.EventHandler(this.refreshPeersButton_Click);
             // 
             // peersTabs
             // 

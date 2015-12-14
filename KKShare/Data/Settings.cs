@@ -24,18 +24,6 @@ namespace KKShare.Data
             name = System.Environment.MachineName;
         }
 
-        internal void SetName(string name, bool updateView)
-        {
-            if (updateView)
-            {
-                Set(Constants.PROP_NAME_SETTINGS_NAME, ref this.name, name);
-            }
-            else
-            {
-                this.name = name;
-            }
-        }
-
         internal bool Set<T>(string propertyName, ref T field, T value)
         {
             if (field == null || EqualityComparer<T>.Default.Equals(field, value))
@@ -56,6 +44,10 @@ namespace KKShare.Data
         public string Name
         {
             get { return name; }
+            set
+            {
+                Set(Constants.PROP_NAME_SETTINGS_NAME, ref this.name, value);
+            }
         }
         #endregion
     }

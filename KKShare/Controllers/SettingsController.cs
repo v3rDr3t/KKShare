@@ -41,7 +41,7 @@ namespace KKShare.Controllers
             {
                 // load <name>
                 string name = settingsFileHandler.ReadName();
-                settings.SetName(name, true);
+                settings.Name = name;
 
                 // load <...>
                 // ...
@@ -59,14 +59,6 @@ namespace KKShare.Controllers
             settingsFileHandler.CreateSettingsFile(name);
         }
 
-        //private void OnPropertyChanged(object sender, PropertyChangeEventArg e)
-        //{
-        //    if (e.PropertyName == "SettingsName")
-        //    {
-        //        // ...
-        //    }
-        //}
-
         internal string GetName()
         {
             return settings.Name;
@@ -74,7 +66,7 @@ namespace KKShare.Controllers
 
         internal void SetName(string name)
         {
-            settings.SetName(name, false);
+            settings.Name = name;
         }
     }
 }

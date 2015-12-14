@@ -13,60 +13,55 @@ namespace KKShare.Announcement
 {
     internal class AnnSender
     {
-        private string name;
-        private Thread annSndThread;
-        private AnnSendWorker worker;
-
-        public AnnSender(string name)
-        {
-            this.name = name;
-        }
-
-        internal void StartSending()
-        {
-            worker = new AnnSendWorker();
-            annSndThread = new Thread(() => worker.Start(this.name));
-            annSndThread.Name = "AnnSender";
-            annSndThread.IsBackground = true;
-            annSndThread.Start();
-        }
-
-        internal void StopSending()
-        {
-            worker.Stop();
-        }
-    }
-
-    internal class AnnSendWorker
-    {
         private UdpClient udpClient;
         private IPEndPoint localEP;
-        private int running;
+        CancellationTokenSource cancelTSource;
 
-        internal  AnnSendWorker()
+        internal AnnSender()
         {
             udpClient = new UdpClient();
             IPAddress multicastAddress = IPAddress.Parse(Constants.MULTICAST_ADDRESS);
             udpClient.JoinMulticastGroup(multicastAddress);
             localEP = new IPEndPoint(multicastAddress, Constants.DEFAULT_PORT);
-            running = 1;
+            cancelTSource = new CancellationTokenSource();
         }
 
-        internal void Start(string name)
+        internal void StartSending(string name)
         {
-            while (running == 1)
+            cancelTSource.Dispose();
+            cancelTSource = new CancellationTokenSource();
+            CancellationToken cancelToken = cancelTSource.Token;
+            Task.Factory.StartNew(async () =>
             {
-                UDPMessage msg = new UDPMessage(UDPMsgType.Announce, name);
-                byte[] data = msg.ToByte();
-                udpClient.Send(data, data.Length, localEP);
-                Log.Instance.AddMessage(Severity.Debug, "Sent announcement.");
-                Thread.Sleep(Constants.ANNOUNCE_SEND_INTERVAL);
-            }
+                while (true)
+                {
+                    try
+                    {
+                        UDPMessage msg = new UDPMessage(UDPMsgType.Announce, name);
+                        byte[] data = msg.ToByte();
+                        udpClient.Send(data, data.Length, localEP);
+                        Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
+                    }
+                    catch (SocketException ex)
+                    {
+                        Log.Instance.AddMessage(Severity.Error,
+                            "Socket exception: " + ex.ErrorCode);
+                    }
+                    await Task.Delay(Constants.ANNOUNCE_SEND_INTERVAL, cancelToken);
+                }
+            }, cancelToken);
         }
 
-        internal void Stop()
+        internal void RestartSending(string name)
         {
-            Interlocked.CompareExchange(ref running, 0, 1);
+            cancelTSource.Cancel();
+            StartSending(name);
+        }
+
+        internal void StopSending()
+        {
+            cancelTSource.Cancel();
+            Log.Instance.AddMessage(Severity.Debug, "Stopped announcing.");
         }
     }
 }

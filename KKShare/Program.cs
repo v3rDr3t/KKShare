@@ -23,10 +23,8 @@ namespace KKShare
             // setup core components
             MainView mainView = new MainView();
             Settings settings = new Settings();
-
-
-            SettingsController settingsController = new SettingsController(settings, mainView);
-            CommController commController = new CommController(settings, mainView);
+            new SettingsController(settings, mainView);
+            new CommController(settings, mainView);
 
             // run
             Application.Run(mainView);

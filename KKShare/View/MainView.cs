@@ -126,5 +126,10 @@ namespace KKShare
                     break;
             }
         }
+
+        private void refreshPeersButton_Click(object sender, EventArgs e)
+        {
+            commController.StopSending();
+        }
     }
 }

@@ -6,38 +6,18 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using KKShare.Controllers;
 using KKShare.Data;
 
 namespace KKShare.Announcement
 {
-    public class AnnReceiver
-    {
-        private Thread annRcvThread;
-        private AnnReceiveWorker worker;
-
-        internal void StartReceiving()
-        {
-            worker = new AnnReceiveWorker();
-            annRcvThread = new Thread(worker.Start);
-            annRcvThread.Name = "AnnReceiver";
-            annRcvThread.IsBackground = true;
-            annRcvThread.Start();
-        }
-
-        internal void StopReceiving()
-        {
-            worker.Stop();
-        }
-    }
-
-    public class AnnReceiveWorker
+    internal class AnnReceiver
     {
         private UdpClient udpClient;
         private IPEndPoint remoteEP;
-        private int running;
+        CancellationTokenSource cancelTSource;
 
-        public AnnReceiveWorker()
+        internal AnnReceiver()
         {
             udpClient = new UdpClient();
             remoteEP = new IPEndPoint(IPAddress.Any, Constants.DEFAULT_PORT);
@@ -48,31 +28,50 @@ namespace KKShare.Announcement
 
             IPAddress multicastAddress = IPAddress.Parse(Constants.MULTICAST_ADDRESS);
             udpClient.JoinMulticastGroup(multicastAddress);
-            running = 1;
+            cancelTSource = new CancellationTokenSource();
         }
 
-        internal void Start()
+        internal void StartReceiving()
         {
-            while (running == 1)
+            CancellationToken cancelToken = cancelTSource.Token;
+            Task.Factory.StartNew(async () =>
             {
-                byte[] buffer = udpClient.Receive(ref remoteEP);
-                UDPMessage msg = new UDPMessage(buffer);
-                if (!isLocalIpAddress(remoteEP.Address.ToString()))
+                while (true)
                 {
-                    switch (msg.Type)
+                    try
                     {
-                        case UDPMsgType.Announce:
-                            Log.Instance.AddMessage(Severity.Debug,
-                                msg.Text + " (" + remoteEP.Address.ToString() + ") announced itself.");
-                            break;
+                        byte[] buffer = udpClient.Receive(ref remoteEP);
+                        if (!isLocalIpAddress(remoteEP.Address.ToString()))
+                        {
+                            UDPMessage msg = new UDPMessage(buffer);
+                            switch (msg.Type)
+                            {
+                                case UDPMsgType.Announce:
+                                    Log.Instance.AddMessage(Severity.Debug,
+                                        msg.Text + " (" + remoteEP.Address.ToString() + ") announced itself.");
+                                    break;
 
-                        default:
-                            Log.Instance.AddMessage(Severity.Warning,
-                                "An invalid UDP message was received and therefor ignored!");
-                            break;
+                                default:
+                                    Log.Instance.AddMessage(Severity.Warning,
+                                        "An invalid UDP message was received and therefor ignored!");
+                                    break;
+                            }
+                        }
                     }
+                    catch (SocketException ex)
+                    {
+                        Log.Instance.AddMessage(Severity.Error,
+                            "Socket exception: " + ex.ErrorCode);
+                    }
+
+                    await Task.Delay(Constants.ANNOUNCE_SEND_INTERVAL, cancelToken);
                 }
-            }
+            }, cancelToken);
+        }
+
+        internal void StopReceiving()
+        {
+            cancelTSource.Cancel();
         }
 
         /// <summary>
@@ -98,11 +97,6 @@ namespace KKShare.Announcement
             }
 
             return false;
-        }
-
-        internal void Stop()
-        {
-            Interlocked.CompareExchange(ref running, 0, 1);
         }
     }
 }
