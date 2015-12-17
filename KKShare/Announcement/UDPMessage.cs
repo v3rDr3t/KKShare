@@ -8,15 +8,15 @@ using KKShare.Data;
 
 namespace KKShare.Announcement
 {
-    internal enum UDPMsgType
+    internal enum UDPHeader
     {
         Null,
         Announce
     }
 
-    class UDPMessage
+    internal class UDPMessage
     {
-        private UDPMsgType type;
+        private UDPHeader type;
         private string text;
 
         /// <summary>
@@ -27,11 +27,11 @@ namespace KKShare.Announcement
         {
             try
             {
-                // convert message type from first 2 byte
-                UDPMsgType parsedType = (UDPMsgType)BitConverter.ToInt32(data, 0);
-                this.type = (UDPMsgType.IsDefined(typeof(UDPMsgType), parsedType))
+                // convert message type from first 2 bytes
+                UDPHeader parsedType = (UDPHeader)BitConverter.ToInt32(data, 0);
+                this.type = (UDPHeader.IsDefined(typeof(UDPHeader), parsedType))
                     ? parsedType
-                    : UDPMsgType.Null;
+                    : UDPHeader.Null;
 
                 // convert message length from next 4 byte
                 int textLength = BitConverter.ToInt32(data, 4);
@@ -41,9 +41,9 @@ namespace KKShare.Announcement
                     ? Encoding.Default.GetString(data, 8, textLength)
                     : string.Empty;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                this.type = UDPMsgType.Null;
+                this.type = UDPHeader.Null;
                 this.text = string.Empty;
             }
         }
@@ -53,7 +53,7 @@ namespace KKShare.Announcement
         /// </summary>
         /// <param name="type">The UDP message type.</param>
         /// <param name="text">The text content.</param>
-        internal UDPMessage(UDPMsgType type, string text)
+        internal UDPMessage(UDPHeader type, string text)
         {
             this.type = type;
             this.text = text;
@@ -87,7 +87,7 @@ namespace KKShare.Announcement
         }
 
         #region Field Getter
-        internal UDPMsgType Type
+        internal UDPHeader Type
         {
             get { return type; }
         }

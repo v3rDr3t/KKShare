@@ -107,6 +107,11 @@ namespace KKShare
                 logFastObjectListView.EnsureVisible(logFastObjectListView.GetItemCount() - 1);
             }
         }
+        
+        internal void SetPeers(List<Peer> peers)
+        {
+            this.lanObjectListView.SetObjects(peers);
+        }
 
         /// <summary>
         /// Updates the main view according to given property./>
@@ -125,11 +130,6 @@ namespace KKShare
                 default:
                     break;
             }
-        }
-
-        private void refreshPeersButton_Click(object sender, EventArgs e)
-        {
-            commController.StopSending();
         }
     }
 }

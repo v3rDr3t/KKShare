@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KKShare
 {
@@ -38,7 +39,8 @@ namespace KKShare
             this.refreshPeersButton = new System.Windows.Forms.Button();
             this.peersTabs = new System.Windows.Forms.TabControl();
             this.lanTabPage = new System.Windows.Forms.TabPage();
-            this.lanDataListView = new BrightIdeasSoftware.DataListView();
+            this.lanObjectListView = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.internetTabPage = new System.Windows.Forms.TabPage();
             this.internetDataListView = new BrightIdeasSoftware.DataListView();
             this.logGroupBox = new System.Windows.Forms.GroupBox();
@@ -77,10 +79,14 @@ namespace KKShare
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.browseTabs = new System.Windows.Forms.TabControl();
+            this.searchTabPage = new System.Windows.Forms.TabPage();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lanObjectListView)).BeginInit();
             this.internetTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).BeginInit();
             this.logGroupBox.SuspendLayout();
@@ -99,6 +105,8 @@ namespace KKShare
             this.downloadsGroupBox.SuspendLayout();
             this.netGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
+            this.browseTabs.SuspendLayout();
+            this.searchTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // peersGroupBox
@@ -150,7 +158,6 @@ namespace KKShare
             this.refreshPeersButton.TabIndex = 3;
             this.refreshPeersButton.Text = "R";
             this.refreshPeersButton.UseVisualStyleBackColor = true;
-            this.refreshPeersButton.Click += new System.EventHandler(this.refreshPeersButton_Click);
             // 
             // peersTabs
             // 
@@ -164,7 +171,7 @@ namespace KKShare
             // 
             // lanTabPage
             // 
-            this.lanTabPage.Controls.Add(this.lanDataListView);
+            this.lanTabPage.Controls.Add(this.lanObjectListView);
             this.lanTabPage.Location = new System.Drawing.Point(4, 22);
             this.lanTabPage.Name = "lanTabPage";
             this.lanTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -173,18 +180,31 @@ namespace KKShare
             this.lanTabPage.Text = "LAN";
             this.lanTabPage.UseVisualStyleBackColor = true;
             // 
-            // lanDataListView
+            // lanObjectListView
             // 
-            this.lanDataListView.CellEditUseWholeCell = false;
-            this.lanDataListView.DataSource = null;
-            this.lanDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.lanDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.lanDataListView.Location = new System.Drawing.Point(6, 6);
-            this.lanDataListView.Name = "lanDataListView";
-            this.lanDataListView.Size = new System.Drawing.Size(168, 271);
-            this.lanDataListView.TabIndex = 1;
-            this.lanDataListView.UseCompatibleStateImageBehavior = false;
-            this.lanDataListView.View = System.Windows.Forms.View.Details;
+            this.lanObjectListView.AllColumns.Add(this.olvColumn12);
+            this.lanObjectListView.CellEditUseWholeCell = false;
+            this.lanObjectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn12});
+            this.lanObjectListView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lanObjectListView.FullRowSelect = true;
+            this.lanObjectListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lanObjectListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.lanObjectListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.lanObjectListView.Location = new System.Drawing.Point(6, 6);
+            this.lanObjectListView.Name = "lanObjectListView";
+            this.lanObjectListView.ShowGroups = false;
+            this.lanObjectListView.Size = new System.Drawing.Size(168, 271);
+            this.lanObjectListView.TabIndex = 2;
+            this.lanObjectListView.UseCompatibleStateImageBehavior = false;
+            this.lanObjectListView.View = System.Windows.Forms.View.Details;
+            // 
+            // olvColumn12
+            // 
+            this.olvColumn12.AspectName = "Name";
+            this.olvColumn12.FillsFreeSpace = true;
+            this.olvColumn12.Text = "PC Name";
+            this.olvColumn12.Width = 100;
             // 
             // internetTabPage
             // 
@@ -201,8 +221,8 @@ namespace KKShare
             // 
             this.internetDataListView.CellEditUseWholeCell = false;
             this.internetDataListView.DataSource = null;
-            this.internetDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.internetDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.internetDataListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.internetDataListView.SelectedBackColor = System.Drawing.Color.Empty;
             this.internetDataListView.Location = new System.Drawing.Point(6, 6);
             this.internetDataListView.Name = "internetDataListView";
             this.internetDataListView.Size = new System.Drawing.Size(168, 271);
@@ -237,8 +257,8 @@ namespace KKShare
             this.logFastObjectListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.logFastObjectListView.FullRowSelect = true;
             this.logFastObjectListView.GridLines = true;
-            this.logFastObjectListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.logFastObjectListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.logFastObjectListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.logFastObjectListView.SelectedBackColor = System.Drawing.Color.Empty;
             this.logFastObjectListView.Location = new System.Drawing.Point(6, 20);
             this.logFastObjectListView.Name = "logFastObjectListView";
             this.logFastObjectListView.ShowGroups = false;
@@ -283,8 +303,7 @@ namespace KKShare
             // 
             // browseTabPage
             // 
-            this.browseTabPage.Controls.Add(this.browseFilesDataListView);
-            this.browseTabPage.Controls.Add(this.browseFolderDataTreeListView);
+            this.browseTabPage.Controls.Add(this.browseTabs);
             this.browseTabPage.Location = new System.Drawing.Point(4, 22);
             this.browseTabPage.Name = "browseTabPage";
             this.browseTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -297,11 +316,12 @@ namespace KKShare
             // 
             this.browseFilesDataListView.CellEditUseWholeCell = false;
             this.browseFilesDataListView.DataSource = null;
-            this.browseFilesDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.browseFilesDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.browseFilesDataListView.Location = new System.Drawing.Point(198, 6);
+            this.browseFilesDataListView.Enabled = false;
+            this.browseFilesDataListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.browseFilesDataListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.browseFilesDataListView.Location = new System.Drawing.Point(191, 31);
             this.browseFilesDataListView.Name = "browseFilesDataListView";
-            this.browseFilesDataListView.Size = new System.Drawing.Size(341, 319);
+            this.browseFilesDataListView.Size = new System.Drawing.Size(328, 256);
             this.browseFilesDataListView.TabIndex = 1;
             this.browseFilesDataListView.UseCompatibleStateImageBehavior = false;
             this.browseFilesDataListView.View = System.Windows.Forms.View.Details;
@@ -310,13 +330,14 @@ namespace KKShare
             // 
             this.browseFolderDataTreeListView.CellEditUseWholeCell = false;
             this.browseFolderDataTreeListView.DataSource = null;
-            this.browseFolderDataTreeListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.browseFolderDataTreeListView.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.browseFolderDataTreeListView.Location = new System.Drawing.Point(6, 6);
+            this.browseFolderDataTreeListView.Enabled = false;
+            this.browseFolderDataTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.browseFolderDataTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.browseFolderDataTreeListView.Location = new System.Drawing.Point(6, 31);
             this.browseFolderDataTreeListView.Name = "browseFolderDataTreeListView";
             this.browseFolderDataTreeListView.RootKeyValueString = "";
             this.browseFolderDataTreeListView.ShowGroups = false;
-            this.browseFolderDataTreeListView.Size = new System.Drawing.Size(185, 319);
+            this.browseFolderDataTreeListView.Size = new System.Drawing.Size(179, 256);
             this.browseFolderDataTreeListView.TabIndex = 0;
             this.browseFolderDataTreeListView.UseCompatibleStateImageBehavior = false;
             this.browseFolderDataTreeListView.View = System.Windows.Forms.View.Details;
@@ -347,8 +368,8 @@ namespace KKShare
             this.sharedDataListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.sharedDataListView.DataSource = null;
             this.sharedDataListView.FullRowSelect = true;
-            this.sharedDataListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.sharedDataListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.sharedDataListView.SelectedBackColor = System.Drawing.Color.Empty;
             this.sharedDataListView.Location = new System.Drawing.Point(6, 6);
             this.sharedDataListView.Name = "sharedDataListView";
             this.sharedDataListView.Size = new System.Drawing.Size(533, 294);
@@ -415,8 +436,8 @@ namespace KKShare
             this.olvColumn3});
             this.downloadsTreeListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.downloadsTreeListView.FullRowSelect = true;
-            this.downloadsTreeListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.downloadsTreeListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.downloadsTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.downloadsTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
             this.downloadsTreeListView.Location = new System.Drawing.Point(6, 6);
             this.downloadsTreeListView.Name = "downloadsTreeListView";
             this.downloadsTreeListView.ShowGroups = false;
@@ -463,8 +484,8 @@ namespace KKShare
             this.olvColumn6});
             this.uploadsTreeListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.uploadsTreeListView.FullRowSelect = true;
-            this.uploadsTreeListView.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.uploadsTreeListView.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.uploadsTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
+            this.uploadsTreeListView.SelectedBackColor = System.Drawing.Color.Empty;
             this.uploadsTreeListView.Location = new System.Drawing.Point(6, 6);
             this.uploadsTreeListView.Name = "uploadsTreeListView";
             this.uploadsTreeListView.ShowGroups = false;
@@ -513,6 +534,7 @@ namespace KKShare
             // 
             // downloadsTextBox
             // 
+            this.downloadsTextBox.Enabled = false;
             this.downloadsTextBox.Location = new System.Drawing.Point(9, 20);
             this.downloadsTextBox.Name = "downloadsTextBox";
             this.downloadsTextBox.Size = new System.Drawing.Size(482, 20);
@@ -520,6 +542,7 @@ namespace KKShare
             // 
             // browseDownloadsButton
             // 
+            this.browseDownloadsButton.Enabled = false;
             this.browseDownloadsButton.Location = new System.Drawing.Point(497, 19);
             this.browseDownloadsButton.Name = "browseDownloadsButton";
             this.browseDownloadsButton.Size = new System.Drawing.Size(30, 22);
@@ -583,6 +606,47 @@ namespace KKShare
             this.inputErrorProvider.ContainerControl = this;
             this.inputErrorProvider.RightToLeft = true;
             // 
+            // browseTabs
+            // 
+            this.browseTabs.Controls.Add(this.searchTabPage);
+            this.browseTabs.Location = new System.Drawing.Point(6, 6);
+            this.browseTabs.Name = "browseTabs";
+            this.browseTabs.SelectedIndex = 0;
+            this.browseTabs.Size = new System.Drawing.Size(533, 319);
+            this.browseTabs.TabIndex = 2;
+            // 
+            // searchTabPage
+            // 
+            this.searchTabPage.Controls.Add(this.searchButton);
+            this.searchTabPage.Controls.Add(this.searchTextBox);
+            this.searchTabPage.Controls.Add(this.browseFolderDataTreeListView);
+            this.searchTabPage.Controls.Add(this.browseFilesDataListView);
+            this.searchTabPage.Location = new System.Drawing.Point(4, 22);
+            this.searchTabPage.Name = "searchTabPage";
+            this.searchTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.searchTabPage.Size = new System.Drawing.Size(525, 293);
+            this.searchTabPage.TabIndex = 0;
+            this.searchTabPage.Text = "Search";
+            this.searchTabPage.UseVisualStyleBackColor = true;
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Enabled = false;
+            this.searchTextBox.Location = new System.Drawing.Point(6, 5);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(485, 20);
+            this.searchTextBox.TabIndex = 2;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Enabled = false;
+            this.searchButton.Location = new System.Drawing.Point(497, 4);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(22, 22);
+            this.searchButton.TabIndex = 5;
+            this.searchButton.Text = "S";
+            this.searchButton.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -598,7 +662,7 @@ namespace KKShare
             this.peersGroupBox.ResumeLayout(false);
             this.peersTabs.ResumeLayout(false);
             this.lanTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lanDataListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lanObjectListView)).EndInit();
             this.internetTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.internetDataListView)).EndInit();
             this.logGroupBox.ResumeLayout(false);
@@ -619,6 +683,9 @@ namespace KKShare
             this.netGroupBox.ResumeLayout(false);
             this.netGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
+            this.browseTabs.ResumeLayout(false);
+            this.searchTabPage.ResumeLayout(false);
+            this.searchTabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -645,7 +712,6 @@ namespace KKShare
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private BrightIdeasSoftware.OLVColumn olvColumn5;
         private BrightIdeasSoftware.OLVColumn olvColumn6;
-        private BrightIdeasSoftware.DataListView lanDataListView;
         private BrightIdeasSoftware.DataListView internetDataListView;
         private BrightIdeasSoftware.FastObjectListView logFastObjectListView;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
@@ -670,6 +736,12 @@ namespace KKShare
         private System.Windows.Forms.TextBox downloadsTextBox;
         private System.Windows.Forms.Button browseDownloadsButton;
         private System.Windows.Forms.GroupBox netGroupBox;
+        private BrightIdeasSoftware.ObjectListView lanObjectListView;
+        private BrightIdeasSoftware.OLVColumn olvColumn12;
+        private System.Windows.Forms.TabControl browseTabs;
+        private System.Windows.Forms.TabPage searchTabPage;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.TextBox searchTextBox;
     }
 }
 

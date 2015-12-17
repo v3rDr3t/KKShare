@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection And Transfers\SharesMsg.cs" />
+    <Compile Include="Connection And Transfers\SharesRequestMsg.cs" />
+    <Compile Include="Connection And Transfers\TCPMessage.cs" />
     <Compile Include="Controllers\CommController.cs" />
     <Compile Include="Controllers\InputValidator.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SettingsFileHandler.cs" />
+    <Compile Include="Data\CommData.cs" />
     <Compile Include="Data\Constants.cs" />
     <Compile Include="Data\Log.cs" />
     <Compile Include="Data\Settings.cs" />
@@ -94,7 +99,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

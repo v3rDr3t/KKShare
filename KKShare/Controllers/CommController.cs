@@ -13,6 +13,7 @@ namespace KKShare.Controllers
     internal class CommController
     {
         private Settings settings;
+        private CommData commData;
         private MainView mainView;
 
         private AnnReceiver discoveryRcv;
@@ -22,10 +23,11 @@ namespace KKShare.Controllers
 
         internal CommController(Settings settings, MainView mainView)
         {
+            commData = new CommData();
             this.settings = settings;
             this.mainView = mainView;
 
-            discoveryRcv = new AnnReceiver();
+            discoveryRcv = new AnnReceiver(this);
             discoverySnd = new AnnSender();
 
             annServiceStarted = false;
@@ -39,6 +41,12 @@ namespace KKShare.Controllers
             discoveryRcv.StartReceiving();
             discoverySnd.StartSending(settings.Name);
             annServiceStarted = true;
+        }
+
+        internal void AddPeer(string ip, string name)
+        {
+            commData.AddPeer(ip, name);
+            mainView.SetPeers(commData.Peers);
         }
 
         private void settingsPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -55,11 +63,6 @@ namespace KKShare.Controllers
                 default:
                     break;
             }
-        }
-
-        internal void StopSending()
-        {
-            discoverySnd.StopSending();
         }
     }
 }
