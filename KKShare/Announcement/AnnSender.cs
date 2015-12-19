@@ -37,19 +37,19 @@ namespace KKShare.Announcement
                 {
                     try
                     {
-                        UDPMessage msg = new UDPMessage(UDPMsgType.Announce, name);
+                        UDPMessage msg = new UDPMessage(UDPHeader.Announce, name);
                         byte[] data = msg.ToByte();
                         udpClient.Send(data, data.Length, localEP);
-                        Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
+                        //Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
                     }
                     catch (SocketException ex)
                     {
-                        Log.Instance.AddMessage(Severity.Error,
-                            "Socket exception: " + ex.ErrorCode);
+                        Log.Instance.AddMessage(Severity.Error, "Socket exception: " + ex.ErrorCode);
                     }
                     await Task.Delay(Constants.ANNOUNCE_SEND_INTERVAL, cancelToken);
                 }
             }, cancelToken);
+            Log.Instance.AddMessage(Severity.Debug, "Started announcing...");
         }
 
         internal void RestartSending(string name)
@@ -61,7 +61,7 @@ namespace KKShare.Announcement
         internal void StopSending()
         {
             cancelTSource.Cancel();
-            Log.Instance.AddMessage(Severity.Debug, "Stopped announcing.");
+            Log.Instance.AddMessage(Severity.Debug, "Stopped announcing...");
         }
     }
 }

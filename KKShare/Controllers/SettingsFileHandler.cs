@@ -50,15 +50,29 @@ namespace KKShare.Controllers
         /// Creates a settings file with given values.
         /// </summary>
         /// <param name="name">The name.</param>
-        internal void CreateSettingsFile(string name)
+        /// <param name="name">The shares.</param>
+        internal void CreateSettingsFile(string name, List<Share> shares)
         {
             xmlDocument.RemoveNodes();
+            // add settings
             XElement rootNode = new XElement(Constants.SETTINGS_FILE_ROOT_NAME);
             xmlDocument.AddFirst(rootNode);
+            // add network
             XElement networkNode = new XElement(Constants.SETTINGS_FILE_NETWORK_NAME);
             rootNode.AddFirst(networkNode);
+            // add name
             XElement nameNode = new XElement(Constants.SETTINGS_FILE_NAME_NAME, name);
             networkNode.Add(nameNode);
+            // add shares
+            XElement sharesNode = new XElement(Constants.SETTINGS_FILE_SHARES_NAME);
+            rootNode.Add(sharesNode);
+            // add share paths
+            foreach (Share share in shares)
+            {
+                XElement shareNode = new XElement(Constants.SETTINGS_FILE_SHARE_PATH_NAME, share.FolderPath);
+                sharesNode.Add(shareNode);
+            }
+
             xmlDocument.Save(Constants.SETTINGS_FILE_NAME);
         }
 
@@ -80,6 +94,23 @@ namespace KKShare.Controllers
             {
                 return System.Environment.MachineName;
             }
+        }
+
+        internal List<string> ReadShares()
+        {
+            List<string> sharePaths = new List<string>();
+            XElement sharesNode = xmlDocument.Root.Element(Constants.SETTINGS_FILE_SHARES_NAME);
+            if (sharesNode != null)
+            {
+                foreach (var sharePathNode in sharesNode.Elements())
+                {
+                    if (sharePathNode.Name.ToString().Equals(Constants.SETTINGS_FILE_SHARE_PATH_NAME))
+                    {
+                        sharePaths.Add(sharePathNode.Value);
+                    }
+                }
+            }
+            return sharePaths;
         }
     }
 }

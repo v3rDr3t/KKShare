@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using KKShare.Data;
+using KKShare.View;
 using KKShare.Controllers;
 
 namespace KKShare

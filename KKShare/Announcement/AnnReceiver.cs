@@ -13,12 +13,16 @@ namespace KKShare.Announcement
 {
     internal class AnnReceiver
     {
+        private CommController commController;
+
         private UdpClient udpClient;
         private IPEndPoint remoteEP;
-        CancellationTokenSource cancelTSource;
+        private CancellationTokenSource cancelTSource;
 
-        internal AnnReceiver()
+        internal AnnReceiver(CommController commController)
         {
+            this.commController = commController;
+
             udpClient = new UdpClient();
             remoteEP = new IPEndPoint(IPAddress.Any, Constants.DEFAULT_PORT);
 
@@ -31,6 +35,9 @@ namespace KKShare.Announcement
             cancelTSource = new CancellationTokenSource();
         }
 
+        /// <summary>
+        /// Starts receiving announcements from other PCs on LAN.
+        /// </summary>
         internal void StartReceiving()
         {
             CancellationToken cancelToken = cancelTSource.Token;
@@ -46,9 +53,8 @@ namespace KKShare.Announcement
                             UDPMessage msg = new UDPMessage(buffer);
                             switch (msg.Type)
                             {
-                                case UDPMsgType.Announce:
-                                    Log.Instance.AddMessage(Severity.Debug,
-                                        msg.Text + " (" + remoteEP.Address.ToString() + ") announced itself.");
+                                case UDPHeader.Announce:
+                                    commController.AddPeer(remoteEP.Address.ToString(), msg.Text);
                                     break;
 
                                 default:
@@ -69,6 +75,9 @@ namespace KKShare.Announcement
             }, cancelToken);
         }
 
+        /// <summary>
+        /// Stops receiving announcements from other PCs on LAN.
+        /// </summary>
         internal void StopReceiving()
         {
             cancelTSource.Cancel();

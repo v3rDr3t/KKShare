@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using KKShare.Data;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Collections;
+using System.IO;
+
+using KKShare.View;
+using KKShare.Utility;
 
 namespace KKShare.Controllers
 {
@@ -39,12 +44,26 @@ namespace KKShare.Controllers
         {
             if (settingsFileHandler.LoadSettingsFile())
             {
-                // load <name>
+                // load <Name>
                 string name = settingsFileHandler.ReadName();
                 settings.Name = name;
-
+                
                 // load <...>
                 // ...
+
+                // load <SharePath>s
+                List<string> shares = settingsFileHandler.ReadShares();
+                if (shares.Any())
+                {
+                    DirectoryCheckView checkView = new DirectoryCheckView(settingsFileHandler.ReadShares());
+                    if (checkView.ShowDialog() == DialogResult.OK)
+                    {
+                        foreach (Share share in checkView.GetCheckedShares())
+                        {
+                            settings.AddShare(share);
+                        }
+                    }
+                }
             }
             else
             {
@@ -55,8 +74,10 @@ namespace KKShare.Controllers
         internal void WriteSettings()
         {
             string name = settings.Name;
+            List<Share> shares = settings.Shares;
             // ...
-            settingsFileHandler.CreateSettingsFile(name);
+
+            settingsFileHandler.CreateSettingsFile(name, shares);
         }
 
         internal string GetName()
@@ -67,6 +88,33 @@ namespace KKShare.Controllers
         internal void SetName(string name)
         {
             settings.Name = name;
+        }
+
+        internal List<Share> GetShares()
+        {
+            return settings.Shares;
+        }
+
+        internal void TryAddShare(string selectedPath)
+        {
+            DirectoryCheckView checkView = new DirectoryCheckView(new List<string>() { selectedPath });
+            if (checkView.ShowDialog() == DialogResult.OK)
+            {
+                foreach (Share share in checkView.GetCheckedShares())
+                {
+                    settings.AddShare(share);
+                }
+            }
+        }
+
+        internal void RemoveShares(List<Share> shares)
+        {
+            settings.RemoveShares(shares);
+        }
+
+        internal void ClearShares()
+        {
+            settings.ClearShares();
         }
     }
 }

@@ -12,8 +12,9 @@ using System.Windows.Forms;
 using KKShare.Controllers;
 using KKShare.Data;
 using KKShare.Announcement;
+using KKShare.Utility;
 
-namespace KKShare
+namespace KKShare.View
 {
     public partial class MainView : Form
     {
@@ -21,6 +22,9 @@ namespace KKShare
         private CommController commController;
         private InputValidator inputValidator;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public MainView()
         {
             InitializeComponent();
@@ -29,12 +33,18 @@ namespace KKShare
             inputValidator = new InputValidator();
         }
 
+        /// <summary>
+        /// Initiates an update of a specific property. Triggered through a (property) change event.
+        /// </summary>
         private void logPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             UpdateProperty(e.PropertyName);
         }
-
-        private void MainView_Load(object sender, EventArgs e)
+        
+        /// <summary>
+        /// ... . Triggered through an event.
+        /// </summary>
+        private void onMainViewShow(object sender, EventArgs e)
         {
             settingsController.LoadSettings();
             commController.StartAnnouncementService();
@@ -54,16 +64,14 @@ namespace KKShare
             switch (inputValidator.ValidateName(nameTextBox.Text))
             {
                 case NameResults.Error:
-                    inputErrorProvider.SetError(nameTextBox,
-                        "Invalid name!");
+                    inputErrorProvider.SetError(nameTextBox, "Invalid name!");
                     e.Cancel = true;
                     break;
 
                 default:
                     inputErrorProvider.Clear();
                     settingsController.SetName(nameTextBox.Text);
-                    Log.Instance.AddMessage(Severity.Debug,
-                        "Changed PC name to " + nameTextBox.Text + ".");
+                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to " + nameTextBox.Text + ".");
                     break;
             }
         }
@@ -102,10 +110,18 @@ namespace KKShare
         /// </summary>
         private void Log_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
         {
-            if (logFastObjectListView.GetItemCount() > 0)
+            if (logFOLV.GetItemCount() > 0)
             {
-                logFastObjectListView.EnsureVisible(logFastObjectListView.GetItemCount() - 1);
+                logFOLV.EnsureVisible(logFOLV.GetItemCount() - 1);
             }
+        }
+
+        /// <summary>
+        /// Updates the peers (lan) view according to given property./>
+        /// </summary>
+        internal void UpdatePeers(List<Peer> peers)
+        {
+            this.lanOLV.SetObjects(peers);
         }
 
         /// <summary>
@@ -118,8 +134,13 @@ namespace KKShare
                 case Constants.PROP_NAME_SETTINGS_NAME:
                     nameTextBox.Text = settingsController.GetName();
                     break;
+
                 case Constants.PROP_NAME_LOG:
-                    logFastObjectListView.SetObjects(Log.Instance.List);
+                    logFOLV.SetObjects(Log.Instance.List);
+                    break;
+
+                case Constants.PROP_NAME_SHARES:
+                    sharesOLV.SetObjects(settingsController.GetShares());
                     break;
 
                 default:
@@ -127,9 +148,54 @@ namespace KKShare
             }
         }
 
-        private void refreshPeersButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Initiates a TCP connection to the respective peer. Triggered through an event.
+        /// </summary>
+        private void Peer_DoubleClick(object sender, EventArgs e)
         {
-            commController.StopSending();
+            Peer selectedPeer = (Peer)this.lanOLV.GetItem(this.lanOLV.SelectedIndex).RowObject;
+            Log.Instance.AddMessage(Severity.Debug, "Connecting to " + selectedPeer.Name);
+        }
+
+        private void Shares_OpenContext(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
+        {
+            e.MenuStrip = (sharesOLV.SelectedItems.Count > 0)
+                ? this.sharedItemCMS
+                : this.sharesCMS;
+        }
+
+        private void sharesCMSAdd_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDiag = new FolderBrowserDialog();
+            if (folderBrowserDiag.ShowDialog() == DialogResult.OK)
+            {
+                settingsController.TryAddShare(folderBrowserDiag.SelectedPath);
+            }
+        }
+
+        private void sharesCMSClear_Click(object sender, EventArgs e)
+        {
+            settingsController.ClearShares();
+        }
+
+        private void sharedItemCMSAdd_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDiag = new FolderBrowserDialog();
+            if (folderBrowserDiag.ShowDialog() == DialogResult.OK)
+            {
+                settingsController.TryAddShare(folderBrowserDiag.SelectedPath);
+            }
+        }
+
+        private void sharedItemCMSRemove_Click(object sender, EventArgs e)
+        {
+            List<Share> selectedShares = sharesOLV.SelectedObjects.Cast<Share>().ToList();
+            settingsController.RemoveShares(selectedShares);
+        }
+
+        private void sharedItemCMSClear_Click(object sender, EventArgs e)
+        {
+            settingsController.ClearShares();
         }
     }
 }
