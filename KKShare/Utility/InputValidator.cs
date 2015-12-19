@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace KKShare.Controllers
+namespace KKShare.Utility
 {
     public enum NameResults { Valid, Error }
 

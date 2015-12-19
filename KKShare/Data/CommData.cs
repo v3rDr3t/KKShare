@@ -24,15 +24,13 @@ namespace KKShare.Data
                 if (!toAdd.Name.Equals(name))
                 {
                     toAdd.Name = name;
-                    Log.Instance.AddMessage(Severity.Debug,
-                        "Modified " + toAdd.Name + " (" + toAdd.IP + ").");
+                    Log.Instance.AddMessage(Severity.Debug, "Modified " + toAdd.Name + " (" + toAdd.IP + ").");
                 }
             }
             else
             {
                 peers.Enqueue(new Peer(ip, name));
-                Log.Instance.AddMessage(Severity.Debug,
-                    "Added " + name + " (" + ip + ").");
+                Log.Instance.AddMessage(Severity.Info, name + " (" + ip + ") announced itself.");
             }
         }
 

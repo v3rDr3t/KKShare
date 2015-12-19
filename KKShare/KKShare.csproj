@@ -51,11 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection And Transfers\SharesMsg.cs" />
-    <Compile Include="Connection And Transfers\SharesRequestMsg.cs" />
-    <Compile Include="Connection And Transfers\TCPMessage.cs" />
+    <Compile Include="ConnectionAndTransfers\TCPMessages\SharesMsg.cs" />
+    <Compile Include="ConnectionAndTransfers\TCPMessages\SharesRequestMsg.cs" />
+    <Compile Include="ConnectionAndTransfers\TCPMessage.cs" />
+    <Compile Include="ConnectionAndTransfers\TCPInterpreter.cs" />
     <Compile Include="Controllers\CommController.cs" />
-    <Compile Include="Controllers\InputValidator.cs" />
+    <Compile Include="Data\Problem.cs" />
+    <Compile Include="Utility\InputValidator.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SettingsFileHandler.cs" />
     <Compile Include="Data\CommData.cs" />
@@ -65,6 +67,13 @@
     <Compile Include="Announcement\AnnReceiver.cs" />
     <Compile Include="Announcement\AnnSender.cs" />
     <Compile Include="Announcement\UDPMessage.cs" />
+    <Compile Include="Data\Share.cs" />
+    <Compile Include="View\DirectoryCheckView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DirectoryCheckView.Designer.cs">
+      <DependentUpon>DirectoryCheckView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +82,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\DirectoryCheckView.resx">
+      <DependentUpon>DirectoryCheckView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -98,6 +111,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileCheck_preloader.GIF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileCheck_preloader_32.GIF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileCheck_accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileCheck_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileCheck_cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,12 +40,11 @@ namespace KKShare.Announcement
                         UDPMessage msg = new UDPMessage(UDPHeader.Announce, name);
                         byte[] data = msg.ToByte();
                         udpClient.Send(data, data.Length, localEP);
-                        Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
+                        //Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
                     }
                     catch (SocketException ex)
                     {
-                        Log.Instance.AddMessage(Severity.Error,
-                            "Socket exception: " + ex.ErrorCode);
+                        Log.Instance.AddMessage(Severity.Error, "Socket exception: " + ex.ErrorCode);
                     }
                     await Task.Delay(Constants.ANNOUNCE_SEND_INTERVAL, cancelToken);
                 }

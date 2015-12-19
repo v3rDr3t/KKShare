@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using KKShare.Data;
+using KKShare.View;
 using KKShare.Announcement;
 using System.ComponentModel;
 
@@ -46,7 +47,7 @@ namespace KKShare.Controllers
         internal void AddPeer(string ip, string name)
         {
             commData.AddPeer(ip, name);
-            mainView.SetPeers(commData.Peers);
+            mainView.UpdatePeers(commData.Peers);
         }
 
         private void settingsPropertyChanged(object sender, PropertyChangedEventArgs e)

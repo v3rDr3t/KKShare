@@ -17,7 +17,7 @@ namespace KKShare.Announcement
 
         private UdpClient udpClient;
         private IPEndPoint remoteEP;
-        CancellationTokenSource cancelTSource;
+        private CancellationTokenSource cancelTSource;
 
         internal AnnReceiver(CommController commController)
         {
@@ -55,8 +55,6 @@ namespace KKShare.Announcement
                             {
                                 case UDPHeader.Announce:
                                     commController.AddPeer(remoteEP.Address.ToString(), msg.Text);
-                                    Log.Instance.AddMessage(Severity.Info,
-                                        msg.Text + " (" + remoteEP.Address.ToString() + ") announced itself.");
                                     break;
 
                                 default:
