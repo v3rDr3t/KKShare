@@ -28,24 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryCheckView));
             this.problemsFOLV = new BrightIdeasSoftware.FastObjectListView();
-            this.problemsOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.parentPathOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.problemOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.infoLabel = new System.Windows.Forms.Label();
             this.okBtn = new System.Windows.Forms.Button();
             this.cancelAbortBtn = new System.Windows.Forms.Button();
             this.checkingWorker = new System.ComponentModel.BackgroundWorker();
             this.imagePicBox = new System.Windows.Forms.PictureBox();
+            this.dirOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.problemsFOLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imagePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // problemsFOLV
             // 
-            this.problemsFOLV.AllColumns.Add(this.problemsOLVCol);
-            this.problemsFOLV.CellEditUseWholeCell = false;
+            this.problemsFOLV.AllColumns.Add(this.problemOLVCol);
+            this.problemsFOLV.AllColumns.Add(this.dirOLVCol);
+            this.problemsFOLV.AllColumns.Add(this.parentPathOLVCol);
+            this.problemsFOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.problemsFOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.problemsOLVCol});
+            this.problemOLVCol,
+            this.dirOLVCol});
             this.problemsFOLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.problemsFOLV.FullRowSelect = true;
             this.problemsFOLV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -53,20 +59,32 @@
             this.problemsFOLV.HighlightForegroundColor = System.Drawing.Color.Empty;
             this.problemsFOLV.Location = new System.Drawing.Point(12, 64);
             this.problemsFOLV.Name = "problemsFOLV";
-            this.problemsFOLV.ShowGroups = false;
+            this.problemsFOLV.SelectColumnsMenuStaysOpen = false;
+            this.problemsFOLV.SelectColumnsOnRightClick = false;
+            this.problemsFOLV.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
+            this.problemsFOLV.ShowFilterMenuOnRightClick = false;
+            this.problemsFOLV.ShowItemCountOnGroups = true;
+            this.problemsFOLV.ShowGroups = true;
             this.problemsFOLV.Size = new System.Drawing.Size(325, 109);
             this.problemsFOLV.TabIndex = 0;
             this.problemsFOLV.UseCompatibleStateImageBehavior = false;
             this.problemsFOLV.View = System.Windows.Forms.View.Details;
             this.problemsFOLV.VirtualMode = true;
             // 
-            // problemsOLVCol
+            // parentPathOLVCol
             // 
-            this.problemsOLVCol.AspectName = "Text";
-            this.problemsOLVCol.FillsFreeSpace = true;
-            this.problemsOLVCol.Groupable = false;
-            this.problemsOLVCol.IsEditable = false;
-            this.problemsOLVCol.Text = "Problems";
+            this.parentPathOLVCol.AspectName = "ParentPath";
+            this.parentPathOLVCol.DisplayIndex = 1;
+            this.parentPathOLVCol.IsEditable = false;
+            this.parentPathOLVCol.IsVisible = false;
+            this.parentPathOLVCol.Text = "Parent";
+            // 
+            // problemOLVCol
+            // 
+            this.problemOLVCol.AspectName = "Text";
+            this.problemOLVCol.IsEditable = false;
+            this.problemOLVCol.Text = "Problem";
+            this.problemOLVCol.Width = 160;
             // 
             // infoLabel
             // 
@@ -112,13 +130,20 @@
             // imagePicBox
             // 
             this.imagePicBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.imagePicBox.Image = ((System.Drawing.Image)(resources.GetObject("imagePicBox.Image")));
+            this.imagePicBox.Image = global::KKShare.Properties.Resources.fileCheck_preloader;
             this.imagePicBox.Location = new System.Drawing.Point(22, 12);
             this.imagePicBox.Name = "imagePicBox";
             this.imagePicBox.Size = new System.Drawing.Size(32, 32);
             this.imagePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.imagePicBox.TabIndex = 1;
             this.imagePicBox.TabStop = false;
+            // 
+            // dirOLVCol
+            // 
+            this.dirOLVCol.AspectName = "DirPath";
+            this.dirOLVCol.FillsFreeSpace = true;
+            this.dirOLVCol.IsEditable = false;
+            this.dirOLVCol.Text = "Directory";
             // 
             // DirectoryCheckView
             // 
@@ -149,11 +174,13 @@
         #endregion
 
         private BrightIdeasSoftware.FastObjectListView problemsFOLV;
-        private BrightIdeasSoftware.OLVColumn problemsOLVCol;
+        private BrightIdeasSoftware.OLVColumn problemOLVCol;
         private System.Windows.Forms.PictureBox imagePicBox;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button okBtn;
         private System.Windows.Forms.Button cancelAbortBtn;
         private System.ComponentModel.BackgroundWorker checkingWorker;
+        private BrightIdeasSoftware.OLVColumn parentPathOLVCol;
+        private BrightIdeasSoftware.OLVColumn dirOLVCol;
     }
 }

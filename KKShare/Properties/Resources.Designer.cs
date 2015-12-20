@@ -93,9 +93,9 @@ namespace KKShare.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fileCheck_preloader_32 {
+        internal static System.Drawing.Bitmap fileCheck_preloader {
             get {
-                object obj = ResourceManager.GetObject("fileCheck_preloader_32", resourceCulture);
+                object obj = ResourceManager.GetObject("fileCheck_preloader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

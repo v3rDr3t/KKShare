@@ -8,16 +8,23 @@ namespace KKShare.Data
 {
     public class Problem
     {
+        private string parentPath;
         private string dirPath;
         private string text;
 
-        public Problem(string dirPath, string text)
+        public Problem(string parentPath, string dirPath, string text)
         {
+            this.parentPath = parentPath;
             this.dirPath = dirPath;
             this.text = text;
         }
 
         #region Field Accessors
+        public string ParentPath
+        {
+            get { return this.parentPath; }
+        }
+
         public string DirPath
         {
             get { return this.dirPath; }

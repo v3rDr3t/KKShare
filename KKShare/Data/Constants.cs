@@ -37,6 +37,9 @@ namespace KKShare.Data
         public const string DIR_CHECK_INFO_TEXT_PASSED = "Passed all checks.\nAdd to shared folders?";
         public const string DIR_CHECK_INFO_TEXT_SOME = "Some problems were identified.\nAdd to shared folders?";
         public const string DIR_CHECK_INFO_TEXT_FAILED = "Problems have been identified.\nFolder cannot be shared!";
+        public const string DIR_CHECK_ERROR_TEXT_UNAUTH = "Insufficient access rights";
+        public const string DIR_CHECK_ERROR_TEXT_DEL = "Does not exist anymore";
+        public const string DIR_CHECK_ERROR_TEXT_UNKNOWN = "Unknown problem";
 
 
         // property names
