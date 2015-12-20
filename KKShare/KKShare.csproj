@@ -57,9 +57,10 @@
     <Compile Include="ConnectionAndTransfers\TCPInterpreter.cs" />
     <Compile Include="Controllers\CommController.cs" />
     <Compile Include="Data\Problem.cs" />
+    <Compile Include="Utility\DirectoryWatcher.cs" />
     <Compile Include="Utility\InputValidator.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Controllers\SettingsFileHandler.cs" />
+    <Compile Include="Utility\SettingsFileHandler.cs" />
     <Compile Include="Data\CommData.cs" />
     <Compile Include="Data\Constants.cs" />
     <Compile Include="Data\Log.cs" />

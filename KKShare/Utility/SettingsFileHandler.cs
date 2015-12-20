@@ -9,7 +9,7 @@ using System.IO;
 
 using KKShare.Data;
 
-namespace KKShare.Controllers
+namespace KKShare.Utility
 {
     public class SettingsFileHandler
     {

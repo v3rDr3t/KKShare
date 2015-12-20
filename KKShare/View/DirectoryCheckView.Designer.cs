@@ -70,6 +70,7 @@
             // 
             // infoLabel
             // 
+            this.infoLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.infoLabel.Location = new System.Drawing.Point(65, 9);
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(272, 41);
@@ -79,6 +80,7 @@
             // 
             // okBtn
             // 
+            this.okBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.okBtn.Enabled = false;
             this.okBtn.Location = new System.Drawing.Point(88, 186);
             this.okBtn.Name = "okBtn";
@@ -90,6 +92,7 @@
             // 
             // cancelAbortBtn
             // 
+            this.cancelAbortBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cancelAbortBtn.Location = new System.Drawing.Point(186, 186);
             this.cancelAbortBtn.Name = "cancelAbortBtn";
             this.cancelAbortBtn.Size = new System.Drawing.Size(75, 23);
@@ -108,6 +111,7 @@
             // 
             // imagePicBox
             // 
+            this.imagePicBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.imagePicBox.Image = ((System.Drawing.Image)(resources.GetObject("imagePicBox.Image")));
             this.imagePicBox.Location = new System.Drawing.Point(22, 12);
             this.imagePicBox.Name = "imagePicBox";
