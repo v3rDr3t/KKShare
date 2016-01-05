@@ -31,6 +31,30 @@ namespace KKShare.View
             Log.Instance.PropertyChanged += new PropertyChangedEventHandler(logPropertyChanged);
 
             inputValidator = new InputValidator();
+            
+            // format size column
+            this.shareSizeOLVCol.AspectToStringConverter = delegate (object cellValue) {
+                long bytesToFormat = (long)cellValue;
+                return formatSize(bytesToFormat);
+            };
+        }
+
+        /// <summary>
+        /// Creates a formated (readable) string from the given bytes.
+        /// </summary>
+        /// <param name="bytesToFormat">The given bytes.</param>
+        /// <returns>The formated folder size string.</returns>
+        private string formatSize(long bytesToFormat)
+        {
+            string[] suffixes = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+            if (bytesToFormat == 0)
+            {
+                return "0 " + suffixes[0];
+            }
+            long bytes = Math.Abs(bytesToFormat);
+            int dimension = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+            double fileSize = Math.Round(bytes / Math.Pow(1024, dimension), 2);
+            return (Math.Sign(bytesToFormat) * fileSize).ToString() + " " + suffixes[dimension];
         }
 
         /// <summary>
@@ -44,13 +68,13 @@ namespace KKShare.View
         /// <summary>
         /// ... . Triggered through an event.
         /// </summary>
-        private void onMainViewShow(object sender, EventArgs e)
+        private void onMainView_Show(object sender, EventArgs e)
         {
             settingsController.LoadSettings();
             commController.StartAnnouncementService();
         }
 
-        private void MainView_Closing(object sender, FormClosingEventArgs e)
+        private void onMainView_Close(object sender, FormClosingEventArgs e)
         {
             settingsController.WriteSettings();
             // TODO: Close open connections etc...
@@ -59,31 +83,76 @@ namespace KKShare.View
         /// <summary>
         /// Validates the user input for the <code>Name</code>. Triggered through an event.
         /// </summary>
-        private void TextBoxName_Validating(object sender, CancelEventArgs e)
+        private void onNameTB_Validating(object sender, CancelEventArgs e)
         {
-            switch (inputValidator.ValidateName(nameTextBox.Text))
+            switch (inputValidator.ValidateName(this.nameTB.Text))
             {
                 case NameResults.Error:
-                    inputErrorProvider.SetError(nameTextBox, "Invalid name!");
+                    inputErrorProvider.SetError(this.nameTB, "Invalid name!");
                     e.Cancel = true;
                     break;
 
                 default:
                     inputErrorProvider.Clear();
-                    settingsController.SetName(nameTextBox.Text);
-                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to " + nameTextBox.Text + ".");
+                    settingsController.SetName(this.nameTB.Text);
+                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to \"" + this.nameTB.Text + "\".");
                     break;
             }
         }
 
         /// <summary>
-        /// Forces a focus change (to initiate validation).
+        /// Forces a focus change (to initiate validation). Triggered through an event.
         /// </summary>
-        private void TextBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        private void onNameTB_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
                 (sender as TextBox).Parent.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Validates the user input for the <code>Downloads</code> folder. Triggered through an event.
+        /// </summary>
+        private void onDownloadsTB_Validating(object sender, CancelEventArgs e)
+        {
+            switch (inputValidator.ValidateDownloads(this.downloadsTB.Text))
+            {
+                case NameResults.Error:
+                    inputErrorProvider.SetError(this.downloadsTB, "Invalid folder!");
+                    //e.Cancel = true;
+                    break;
+
+                default:
+                    inputErrorProvider.Clear();
+                    settingsController.SetDownloadsPath(this.downloadsTB.Text);
+                    Log.Instance.AddMessage(Severity.Debug,
+                        "Changed downloads folder to \"" + this.downloadsTB.Text + "\".");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Forces a focus change (to initiate validation). Triggered through an event.
+        /// </summary>
+        private void onDownloadsTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                (sender as TextBox).Parent.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Initiates a browser dialog for the <code>Downloads</code> folder. Triggered through an event.
+        /// </summary>
+        private void onDownloadsBrowseBtn_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDiag = new FolderBrowserDialog();
+            if (folderBrowserDiag.ShowDialog() == DialogResult.OK)
+            {
+                this.downloadsTB.Text = folderBrowserDiag.SelectedPath;
+                settingsController.SetDownloadsPath(folderBrowserDiag.SelectedPath);
             }
         }
 
@@ -108,7 +177,7 @@ namespace KKShare.View
         /// <summary>
         /// Autoscrolls to the bottom item when items change. Triggered through an event.
         /// </summary>
-        private void Log_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
+        private void onLogView_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
         {
             if (logFOLV.GetItemCount() > 0)
             {
@@ -132,15 +201,19 @@ namespace KKShare.View
             switch (propertyName)
             {
                 case Constants.PROP_NAME_SETTINGS_NAME:
-                    nameTextBox.Text = settingsController.GetName();
+                    this.nameTB.Text = settingsController.GetName();
+                    break;
+
+                case Constants.PROP_DOWNLAODS_SETTINGS_NAME:
+                    this.downloadsTB.Text = settingsController.GetDownloadsPath();
                     break;
 
                 case Constants.PROP_NAME_LOG:
-                    logFOLV.SetObjects(Log.Instance.List);
+                    this.logFOLV.SetObjects(Log.Instance.List);
                     break;
 
                 case Constants.PROP_NAME_SHARES:
-                    sharesOLV.SetObjects(settingsController.GetShares());
+                    this.sharesOLV.SetObjects(settingsController.GetShares());
                     break;
 
                 default:
@@ -151,20 +224,31 @@ namespace KKShare.View
         /// <summary>
         /// Initiates a TCP connection to the respective peer. Triggered through an event.
         /// </summary>
-        private void Peer_DoubleClick(object sender, EventArgs e)
+        private void onPeer_DoubleClick(object sender, EventArgs e)
         {
             Peer selectedPeer = (Peer)this.lanOLV.GetItem(this.lanOLV.SelectedIndex).RowObject;
             Log.Instance.AddMessage(Severity.Debug, "Connecting to " + selectedPeer.Name);
         }
 
-        private void Shares_OpenContext(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
+        /// <summary>
+        /// Shows the context menu for the shares view. Triggered through an event.
+        /// </summary>
+        private void onShares_OpenContext(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
         {
-            e.MenuStrip = (sharesOLV.SelectedItems.Count > 0)
-                ? this.sharedItemCMS
-                : this.sharesCMS;
+            this.sharesCMSAdd.Visible = true;
+            this.sharesCMSRemove.Visible = true;
+            this.sharesCMSClear.Visible = true;
+            if (sharesOLV.SelectedItems.Count < 1)
+            {
+                this.sharesCMSRemove.Visible = false;
+            }
+            e.MenuStrip = this.sharesCMS;
         }
 
-        private void sharesCMSAdd_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Initiates the addition of a new share. Triggered through an event.
+        /// </summary>
+        private void onSharesCMSAdd_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDiag = new FolderBrowserDialog();
             if (folderBrowserDiag.ShowDialog() == DialogResult.OK)
@@ -172,28 +256,20 @@ namespace KKShare.View
                 settingsController.TryAddShare(folderBrowserDiag.SelectedPath);
             }
         }
-
-        private void sharesCMSClear_Click(object sender, EventArgs e)
-        {
-            settingsController.ClearShares();
-        }
-
-        private void sharedItemCMSAdd_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDiag = new FolderBrowserDialog();
-            if (folderBrowserDiag.ShowDialog() == DialogResult.OK)
-            {
-                settingsController.TryAddShare(folderBrowserDiag.SelectedPath);
-            }
-        }
-
-        private void sharedItemCMSRemove_Click(object sender, EventArgs e)
+        
+        /// <summary>
+        /// Removes a selected share. Triggered through an event.
+        /// </summary>
+        private void onSharesCMSRemove_Click(object sender, EventArgs e)
         {
             List<Share> selectedShares = sharesOLV.SelectedObjects.Cast<Share>().ToList();
             settingsController.RemoveShares(selectedShares);
         }
 
-        private void sharedItemCMSClear_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Clears all shares. Triggered through an event.
+        /// </summary>
+        private void onSharesCMSClear_Click(object sender, EventArgs e)
         {
             settingsController.ClearShares();
         }

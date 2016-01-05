@@ -12,6 +12,7 @@ namespace KKShare.Data
     {
         private int port;
         private string name;
+        private string downloadsPath;
 
         private List<Share> shares;
         
@@ -22,15 +23,16 @@ namespace KKShare.Data
         /// </summary>
         public Settings()
         {
-            port = Constants.DEFAULT_PORT;
-            name = System.Environment.MachineName;
+            this.port = Constants.DEFAULT_PORT;
+            this.name = System.Environment.MachineName;
+            this.downloadsPath = System.Windows.Forms.Application.StartupPath;
 
             shares = new List<Share>();
         }
 
         internal bool AddShare(Share share)
         {
-            if (shares == null || shares.FindIndex(item => item.FolderPath.Equals(share.FolderPath)) >= 0)
+            if (shares == null || shares.FindIndex(item => item.DirPath.Equals(share.DirPath)) >= 0)
             {
                 return false;
             }
@@ -81,16 +83,22 @@ namespace KKShare.Data
         #region Field Accessors
         public int Port
         {
-            get { return port; }
+            get { return this.port; }
         }
 
         public string Name
         {
-            get { return name; }
+            get { return this.name; }
             set { Set(Constants.PROP_NAME_SETTINGS_NAME, ref this.name, value); }
         }
 
-        public List<Share> Shares
+        internal string DownloadsPath
+        {
+            get { return this.downloadsPath; }
+            set { Set(Constants.PROP_DOWNLAODS_SETTINGS_NAME, ref this.downloadsPath, value); }
+        }
+
+        internal List<Share> Shares
         {
             get { return this.shares; }
         }

@@ -22,8 +22,9 @@ namespace KKShare.Controllers
         private SettingsFileHandler settingsFileHandler;
         private List<DirectoryWatcher> dirWatchers;
 
-        delegate void DirWorkerEventHandler(object sender, FileSystemEventArgs e);
-        delegate void DirWorkerErrorHandler(object sender, ErrorEventArgs e);
+        private delegate void DirWorkerEventHandler(object sender, FileSystemEventArgs e);
+        private delegate void DirWorkerRenameHandler(object sender, RenamedEventArgs e);
+        private delegate void DirWorkerErrorHandler(object sender, ErrorEventArgs e);
 
         public SettingsController(Settings settings, MainView mainView)
         {
@@ -55,7 +56,11 @@ namespace KKShare.Controllers
                 // load <Name>
                 string name = settingsFileHandler.ReadName();
                 settings.Name = name;
-                
+
+                // load <DownloadsPath>
+                string downloadsPath = settingsFileHandler.ReadDownloadsPath();
+                settings.DownloadsPath = downloadsPath;
+
                 // load <...>
                 // ...
 
@@ -66,7 +71,7 @@ namespace KKShare.Controllers
                     DirectoryCheckView checkView = new DirectoryCheckView(settingsFileHandler.ReadShares());
                     if (checkView.ShowDialog() == DialogResult.OK)
                     {
-                        foreach (Share share in checkView.GetCheckedShares())
+                        foreach (Share share in checkView.Shares)
                         {
                             settings.AddShare(share);
                         }
@@ -85,10 +90,11 @@ namespace KKShare.Controllers
         internal void WriteSettings()
         {
             string name = settings.Name;
+            string downloadsPath = settings.DownloadsPath;
             List<Share> shares = settings.Shares;
             // ...
 
-            settingsFileHandler.CreateSettingsFile(name, shares);
+            settingsFileHandler.CreateSettingsFile(name, downloadsPath, shares);
         }
 
         /// <summary>
@@ -110,6 +116,24 @@ namespace KKShare.Controllers
         }
 
         /// <summary>
+        /// Returns the downloads folder path from the model.
+        /// </summary>
+        /// <returns>The downloads folder path.</returns>
+        internal string GetDownloadsPath()
+        {
+            return settings.DownloadsPath;
+        }
+
+        /// <summary>
+        /// Sets the downloads folder path defined in the model to the given path.
+        /// </summary>
+        /// <param name="path">The given name.</param>
+        internal void SetDownloadsPath(string path)
+        {
+            settings.DownloadsPath = path;
+        }
+
+        /// <summary>
         /// Returns the shares from the model.
         /// </summary>
         /// <returns>The shares.</returns>
@@ -128,10 +152,10 @@ namespace KKShare.Controllers
             DirectoryCheckView checkView = new DirectoryCheckView(new List<string>() { selectedPath });
             if (checkView.ShowDialog() == DialogResult.OK)
             {
-                foreach (Share share in checkView.GetCheckedShares())
+                foreach (Share share in checkView.Shares)
                 {
                     settings.AddShare(share);
-                    startDirWatcher(share.FolderPath, "*.*");
+                    startDirWatcher(share.DirPath, "*.*");
                 }
             }
         }
@@ -175,7 +199,7 @@ namespace KKShare.Controllers
             dirWatcher.ChangedMethod = new DirWorkerEventHandler(dirWatcherChanged);
             dirWatcher.CreatedMethod = new DirWorkerEventHandler(dirWatcherCreated);
             dirWatcher.DeletedMethod = new DirWorkerEventHandler(dirWatcherDeleted);
-            dirWatcher.RenamedMethod = new DirWorkerEventHandler(dirWatcherRenamed);
+            dirWatcher.RenamedMethod = new DirWorkerRenameHandler(dirWatcherRenamed);
             dirWatcher.ErrorMethod = new DirWorkerErrorHandler(dirWatcherError);
             // start and add
             dirWatcher.StartWatching();
@@ -190,7 +214,7 @@ namespace KKShare.Controllers
         {
             foreach (Share share in shares)
             {
-                int idx = this.dirWatchers.FindIndex(item => item.DirPath.Equals(share.FolderPath));
+                int idx = this.dirWatchers.FindIndex(item => item.DirPath.Equals(share.DirPath));
                 if (idx >= 0)
                 {
                     this.dirWatchers.ElementAt(idx).StopWatching();
@@ -200,29 +224,34 @@ namespace KKShare.Controllers
         }
 
         #region Directory Watcher Event Handlers
-        // TODO: Implement...
         private void dirWatcherChanged(object sender, FileSystemEventArgs e)
         {
-            Log.Instance.AddMessage(Severity.Debug, "Change in file \"" + e.FullPath + "\".");
+            // TODO: Implement...
+            Log.Instance.AddMessage(Severity.Debug, "Changed file \"" + e.FullPath + "\".");
         }
 
         private void dirWatcherCreated(object sender, FileSystemEventArgs e)
         {
-            Log.Instance.AddMessage(Severity.Debug, "Change in file \"" + e.FullPath + "\".");
+            // TODO: Implement...
+            Log.Instance.AddMessage(Severity.Debug, "Created file \"" + e.FullPath + "\".");
         }
 
         private void dirWatcherDeleted(object sender, FileSystemEventArgs e)
         {
-            Log.Instance.AddMessage(Severity.Debug, "Change in file \"" + e.FullPath + "\".");
+            // TODO: Implement...
+            Log.Instance.AddMessage(Severity.Debug, "Deleted file \"" + e.FullPath + "\".");
         }
 
-        private void dirWatcherRenamed(object sender, FileSystemEventArgs e)
+        private void dirWatcherRenamed(object sender, RenamedEventArgs e)
         {
-            Log.Instance.AddMessage(Severity.Debug, "Change in file \"" + e.FullPath + "\".");
+            // TODO: Implement...
+            Log.Instance.AddMessage(Severity.Debug, "Renamed file from \"" + e.OldFullPath + "\" to \""
+                + e.FullPath + "\".");
         }
 
         private void dirWatcherError(object sender, ErrorEventArgs e)
         {
+            // TODO: Implement...
             Log.Instance.AddMessage(Severity.Debug, "Error: \"" + e.GetException().Message + "\".");
         }
         #endregion

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.problemsFOLV = new BrightIdeasSoftware.FastObjectListView();
-            this.parentPathOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.problemOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dirOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.parentPathOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.infoLabel = new System.Windows.Forms.Label();
             this.okBtn = new System.Windows.Forms.Button();
             this.cancelAbortBtn = new System.Windows.Forms.Button();
             this.checkingWorker = new System.ComponentModel.BackgroundWorker();
             this.imagePicBox = new System.Windows.Forms.PictureBox();
-            this.dirOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.problemsFOLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imagePicBox)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +49,7 @@
             this.problemsFOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.problemsFOLV.CellEditUseWholeCell = false;
             this.problemsFOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.problemOLVCol,
             this.dirOLVCol});
@@ -63,28 +64,38 @@
             this.problemsFOLV.SelectColumnsOnRightClick = false;
             this.problemsFOLV.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
             this.problemsFOLV.ShowFilterMenuOnRightClick = false;
+            this.problemsFOLV.ShowGroups = false;
             this.problemsFOLV.ShowItemCountOnGroups = true;
-            this.problemsFOLV.ShowGroups = true;
             this.problemsFOLV.Size = new System.Drawing.Size(325, 109);
             this.problemsFOLV.TabIndex = 0;
             this.problemsFOLV.UseCompatibleStateImageBehavior = false;
             this.problemsFOLV.View = System.Windows.Forms.View.Details;
             this.problemsFOLV.VirtualMode = true;
             // 
+            // problemOLVCol
+            // 
+            this.problemOLVCol.AspectName = "Text";
+            this.problemOLVCol.Groupable = false;
+            this.problemOLVCol.IsEditable = false;
+            this.problemOLVCol.Text = "Problem";
+            this.problemOLVCol.Width = 160;
+            // 
+            // dirOLVCol
+            // 
+            this.dirOLVCol.AspectName = "DirPath";
+            this.dirOLVCol.FillsFreeSpace = true;
+            this.dirOLVCol.Groupable = false;
+            this.dirOLVCol.IsEditable = false;
+            this.dirOLVCol.Text = "Directory";
+            // 
             // parentPathOLVCol
             // 
             this.parentPathOLVCol.AspectName = "ParentPath";
             this.parentPathOLVCol.DisplayIndex = 1;
+            this.parentPathOLVCol.Groupable = false;
             this.parentPathOLVCol.IsEditable = false;
             this.parentPathOLVCol.IsVisible = false;
             this.parentPathOLVCol.Text = "Parent";
-            // 
-            // problemOLVCol
-            // 
-            this.problemOLVCol.AspectName = "Text";
-            this.problemOLVCol.IsEditable = false;
-            this.problemOLVCol.Text = "Problem";
-            this.problemOLVCol.Width = 160;
             // 
             // infoLabel
             // 
@@ -138,13 +149,6 @@
             this.imagePicBox.TabIndex = 1;
             this.imagePicBox.TabStop = false;
             // 
-            // dirOLVCol
-            // 
-            this.dirOLVCol.AspectName = "DirPath";
-            this.dirOLVCol.FillsFreeSpace = true;
-            this.dirOLVCol.IsEditable = false;
-            this.dirOLVCol.Text = "Directory";
-            // 
             // DirectoryCheckView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,7 +165,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Directory Check";
+            this.Text = "Shared Folder Check";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.onFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.problemsFOLV)).EndInit();

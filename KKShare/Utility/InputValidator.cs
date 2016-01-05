@@ -20,5 +20,12 @@ namespace KKShare.Utility
             }
             return NameResults.Error;
         }
+
+        internal NameResults ValidateDownloads(string path)
+        {
+            return (path.Equals(string.Empty) || System.IO.Directory.Exists(path))
+                ? NameResults.Valid
+                : NameResults.Error;
+        }
     }
 }

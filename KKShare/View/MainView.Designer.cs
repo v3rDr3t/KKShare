@@ -49,15 +49,14 @@ namespace KKShare.View
             this.browseTabPage = new System.Windows.Forms.TabPage();
             this.browseTabs = new System.Windows.Forms.TabControl();
             this.searchTabPage = new System.Windows.Forms.TabPage();
-            this.objectListView2 = new BrightIdeasSoftware.ObjectListView();
-            this.treeListView1 = new BrightIdeasSoftware.TreeListView();
+            this.searchTLV = new BrightIdeasSoftware.TreeListView();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.shareTabPage = new System.Windows.Forms.TabPage();
             this.sharesOLV = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn14 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.shareFolderOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.shareFilesOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.shareSizeOLVCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.downloadTabPage = new System.Windows.Forms.TabPage();
             this.downloadsTreeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -70,21 +69,18 @@ namespace KKShare.View
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.downloadsGroupBox = new System.Windows.Forms.GroupBox();
-            this.downloadsTextBox = new System.Windows.Forms.TextBox();
+            this.downloadsTB = new System.Windows.Forms.TextBox();
             this.browseDownloadsButton = new System.Windows.Forms.Button();
             this.netGroupBox = new System.Windows.Forms.GroupBox();
             this.portTextBox = new System.Windows.Forms.TextBox();
             this.portLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameTB = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.sharesCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sharesCMSAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.sharesCMSRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.sharesCMSClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.sharedItemCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sharedItemCMSAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.sharedItemCMSRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.sharedItemCMSClear = new System.Windows.Forms.ToolStripMenuItem();
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
@@ -97,8 +93,7 @@ namespace KKShare.View
             this.browseTabPage.SuspendLayout();
             this.browseTabs.SuspendLayout();
             this.searchTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTLV)).BeginInit();
             this.shareTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sharesOLV)).BeginInit();
             this.downloadTabPage.SuspendLayout();
@@ -110,7 +105,6 @@ namespace KKShare.View
             this.netGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
             this.sharesCMS.SuspendLayout();
-            this.sharedItemCMS.SuspendLayout();
             this.SuspendLayout();
             // 
             // peersGroupBox
@@ -162,7 +156,7 @@ namespace KKShare.View
             this.lanOLV.TabIndex = 2;
             this.lanOLV.UseCompatibleStateImageBehavior = false;
             this.lanOLV.View = System.Windows.Forms.View.Details;
-            this.lanOLV.ItemActivate += new System.EventHandler(this.Peer_DoubleClick);
+            this.lanOLV.ItemActivate += new System.EventHandler(this.onPeer_DoubleClick);
             // 
             // olvColumn12
             // 
@@ -246,7 +240,7 @@ namespace KKShare.View
             this.logFOLV.UseCompatibleStateImageBehavior = false;
             this.logFOLV.View = System.Windows.Forms.View.Details;
             this.logFOLV.VirtualMode = true;
-            this.logFOLV.ItemsChanged += new System.EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(this.Log_ItemsChanged);
+            this.logFOLV.ItemsChanged += new System.EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(this.onLogView_ItemsChanged);
             // 
             // olvColumn7
             // 
@@ -302,8 +296,7 @@ namespace KKShare.View
             // 
             // searchTabPage
             // 
-            this.searchTabPage.Controls.Add(this.objectListView2);
-            this.searchTabPage.Controls.Add(this.treeListView1);
+            this.searchTabPage.Controls.Add(this.searchTLV);
             this.searchTabPage.Controls.Add(this.searchButton);
             this.searchTabPage.Controls.Add(this.searchTextBox);
             this.searchTabPage.Location = new System.Drawing.Point(4, 22);
@@ -314,34 +307,20 @@ namespace KKShare.View
             this.searchTabPage.Text = "Search";
             this.searchTabPage.UseVisualStyleBackColor = true;
             // 
-            // objectListView2
+            // searchTLV
             // 
-            this.objectListView2.CellEditUseWholeCell = false;
-            this.objectListView2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objectListView2.Enabled = false;
-            this.objectListView2.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.objectListView2.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.objectListView2.Location = new System.Drawing.Point(214, 32);
-            this.objectListView2.Name = "objectListView2";
-            this.objectListView2.Size = new System.Drawing.Size(305, 255);
-            this.objectListView2.TabIndex = 7;
-            this.objectListView2.UseCompatibleStateImageBehavior = false;
-            this.objectListView2.View = System.Windows.Forms.View.Details;
-            // 
-            // treeListView1
-            // 
-            this.treeListView1.CellEditUseWholeCell = false;
-            this.treeListView1.Enabled = false;
-            this.treeListView1.HighlightBackgroundColor = System.Drawing.Color.Empty;
-            this.treeListView1.HighlightForegroundColor = System.Drawing.Color.Empty;
-            this.treeListView1.Location = new System.Drawing.Point(6, 32);
-            this.treeListView1.Name = "treeListView1";
-            this.treeListView1.ShowGroups = false;
-            this.treeListView1.Size = new System.Drawing.Size(201, 255);
-            this.treeListView1.TabIndex = 6;
-            this.treeListView1.UseCompatibleStateImageBehavior = false;
-            this.treeListView1.View = System.Windows.Forms.View.Details;
-            this.treeListView1.VirtualMode = true;
+            this.searchTLV.CellEditUseWholeCell = false;
+            this.searchTLV.Enabled = false;
+            this.searchTLV.HighlightBackgroundColor = System.Drawing.Color.Empty;
+            this.searchTLV.HighlightForegroundColor = System.Drawing.Color.Empty;
+            this.searchTLV.Location = new System.Drawing.Point(6, 32);
+            this.searchTLV.Name = "searchTLV";
+            this.searchTLV.ShowGroups = false;
+            this.searchTLV.Size = new System.Drawing.Size(513, 255);
+            this.searchTLV.TabIndex = 6;
+            this.searchTLV.UseCompatibleStateImageBehavior = false;
+            this.searchTLV.View = System.Windows.Forms.View.Details;
+            this.searchTLV.VirtualMode = true;
             // 
             // searchButton
             // 
@@ -374,15 +353,15 @@ namespace KKShare.View
             // 
             // sharesOLV
             // 
-            this.sharesOLV.AllColumns.Add(this.olvColumn10);
-            this.sharesOLV.AllColumns.Add(this.olvColumn11);
-            this.sharesOLV.AllColumns.Add(this.olvColumn14);
+            this.sharesOLV.AllColumns.Add(this.shareFolderOLVCol);
+            this.sharesOLV.AllColumns.Add(this.shareFilesOLVCol);
+            this.sharesOLV.AllColumns.Add(this.shareSizeOLVCol);
             this.sharesOLV.BackColor = System.Drawing.SystemColors.Window;
             this.sharesOLV.CellEditUseWholeCell = false;
             this.sharesOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn10,
-            this.olvColumn11,
-            this.olvColumn14});
+            this.shareFolderOLVCol,
+            this.shareFilesOLVCol,
+            this.shareSizeOLVCol});
             this.sharesOLV.Cursor = System.Windows.Forms.Cursors.Default;
             this.sharesOLV.FullRowSelect = true;
             this.sharesOLV.HasCollapsibleGroups = false;
@@ -394,30 +373,32 @@ namespace KKShare.View
             this.sharesOLV.TabIndex = 6;
             this.sharesOLV.UseCompatibleStateImageBehavior = false;
             this.sharesOLV.View = System.Windows.Forms.View.Details;
-            this.sharesOLV.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.Shares_OpenContext);
+            this.sharesOLV.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.onShares_OpenContext);
             // 
-            // olvColumn10
+            // shareFolderOLVCol
             // 
-            this.olvColumn10.AspectName = "FolderPath";
-            this.olvColumn10.Groupable = false;
-            this.olvColumn10.HeaderImageKey = "";
-            this.olvColumn10.Text = "Folder";
-            this.olvColumn10.Width = 364;
+            this.shareFolderOLVCol.AspectName = "DirPath";
+            this.shareFolderOLVCol.Groupable = false;
+            this.shareFolderOLVCol.HeaderImageKey = "";
+            this.shareFolderOLVCol.Text = "Folder";
+            this.shareFolderOLVCol.Width = 364;
             // 
-            // olvColumn11
+            // shareFilesOLVCol
             // 
-            this.olvColumn11.AspectName = "FileCount";
-            this.olvColumn11.Groupable = false;
-            this.olvColumn11.Text = "Files";
-            this.olvColumn11.Width = 80;
+            this.shareFilesOLVCol.AspectName = "GetFilesOnlyCount";
+            this.shareFilesOLVCol.Groupable = false;
+            this.shareFilesOLVCol.Text = "Files";
+            this.shareFilesOLVCol.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.shareFilesOLVCol.Width = 80;
             // 
-            // olvColumn14
+            // shareSizeOLVCol
             // 
-            this.olvColumn14.AspectName = "FolderSize";
-            this.olvColumn14.FillsFreeSpace = true;
-            this.olvColumn14.Groupable = false;
-            this.olvColumn14.Text = "Size";
-            this.olvColumn14.Width = 84;
+            this.shareSizeOLVCol.AspectName = "GetSize";
+            this.shareSizeOLVCol.FillsFreeSpace = true;
+            this.shareSizeOLVCol.Groupable = false;
+            this.shareSizeOLVCol.Text = "Size";
+            this.shareSizeOLVCol.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.shareSizeOLVCol.Width = 84;
             // 
             // downloadTabPage
             // 
@@ -530,7 +511,7 @@ namespace KKShare.View
             // 
             // downloadsGroupBox
             // 
-            this.downloadsGroupBox.Controls.Add(this.downloadsTextBox);
+            this.downloadsGroupBox.Controls.Add(this.downloadsTB);
             this.downloadsGroupBox.Controls.Add(this.browseDownloadsButton);
             this.downloadsGroupBox.Location = new System.Drawing.Point(6, 93);
             this.downloadsGroupBox.Name = "downloadsGroupBox";
@@ -539,29 +520,30 @@ namespace KKShare.View
             this.downloadsGroupBox.TabStop = false;
             this.downloadsGroupBox.Text = "Downloads";
             // 
-            // downloadsTextBox
+            // downloadsTB
             // 
-            this.downloadsTextBox.Enabled = false;
-            this.downloadsTextBox.Location = new System.Drawing.Point(9, 20);
-            this.downloadsTextBox.Name = "downloadsTextBox";
-            this.downloadsTextBox.Size = new System.Drawing.Size(482, 20);
-            this.downloadsTextBox.TabIndex = 1;
+            this.downloadsTB.Location = new System.Drawing.Point(9, 20);
+            this.downloadsTB.Name = "downloadsTB";
+            this.downloadsTB.Size = new System.Drawing.Size(482, 20);
+            this.downloadsTB.TabIndex = 1;
+            this.downloadsTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onDownloadsTB_KeyPress);
+            this.downloadsTB.Validating += new System.ComponentModel.CancelEventHandler(this.onDownloadsTB_Validating);
             // 
             // browseDownloadsButton
             // 
-            this.browseDownloadsButton.Enabled = false;
             this.browseDownloadsButton.Location = new System.Drawing.Point(497, 19);
             this.browseDownloadsButton.Name = "browseDownloadsButton";
             this.browseDownloadsButton.Size = new System.Drawing.Size(30, 22);
             this.browseDownloadsButton.TabIndex = 0;
             this.browseDownloadsButton.Text = "...";
             this.browseDownloadsButton.UseVisualStyleBackColor = true;
+            this.browseDownloadsButton.Click += new System.EventHandler(this.onDownloadsBrowseBtn_Click);
             // 
             // netGroupBox
             // 
             this.netGroupBox.Controls.Add(this.portTextBox);
             this.netGroupBox.Controls.Add(this.portLabel);
-            this.netGroupBox.Controls.Add(this.nameTextBox);
+            this.netGroupBox.Controls.Add(this.nameTB);
             this.netGroupBox.Controls.Add(this.nameLabel);
             this.netGroupBox.Location = new System.Drawing.Point(6, 6);
             this.netGroupBox.Name = "netGroupBox";
@@ -588,15 +570,15 @@ namespace KKShare.View
             this.portLabel.TabIndex = 0;
             this.portLabel.Text = "Port:";
             // 
-            // nameTextBox
+            // nameTB
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(70, 45);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(142, 20);
-            this.nameTextBox.TabIndex = 3;
-            this.nameTextBox.Text = "...";
-            this.nameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxName_KeyPress);
-            this.nameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxName_Validating);
+            this.nameTB.Location = new System.Drawing.Point(70, 45);
+            this.nameTB.Name = "nameTB";
+            this.nameTB.Size = new System.Drawing.Size(142, 20);
+            this.nameTB.TabIndex = 3;
+            this.nameTB.Text = "...";
+            this.nameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onNameTB_KeyPress);
+            this.nameTB.Validating += new System.ComponentModel.CancelEventHandler(this.onNameTB_Validating);
             // 
             // nameLabel
             // 
@@ -617,53 +599,31 @@ namespace KKShare.View
             // 
             this.sharesCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sharesCMSAdd,
+            this.sharesCMSRemove,
             this.sharesCMSClear});
-            this.sharesCMS.Name = "sharesCMS";
-            this.sharesCMS.Size = new System.Drawing.Size(102, 48);
+            this.sharesCMS.Name = "sharedItemCMS";
+            this.sharesCMS.Size = new System.Drawing.Size(118, 70);
             // 
             // sharesCMSAdd
             // 
             this.sharesCMSAdd.Name = "sharesCMSAdd";
-            this.sharesCMSAdd.Size = new System.Drawing.Size(101, 22);
+            this.sharesCMSAdd.Size = new System.Drawing.Size(117, 22);
             this.sharesCMSAdd.Text = "Add";
-            this.sharesCMSAdd.Click += new System.EventHandler(this.sharesCMSAdd_Click);
+            this.sharesCMSAdd.Click += new System.EventHandler(this.onSharesCMSAdd_Click);
+            // 
+            // sharesCMSRemove
+            // 
+            this.sharesCMSRemove.Name = "sharesCMSRemove";
+            this.sharesCMSRemove.Size = new System.Drawing.Size(117, 22);
+            this.sharesCMSRemove.Text = "Remove";
+            this.sharesCMSRemove.Click += new System.EventHandler(this.onSharesCMSRemove_Click);
             // 
             // sharesCMSClear
             // 
             this.sharesCMSClear.Name = "sharesCMSClear";
-            this.sharesCMSClear.Size = new System.Drawing.Size(101, 22);
+            this.sharesCMSClear.Size = new System.Drawing.Size(117, 22);
             this.sharesCMSClear.Text = "Clear";
-            this.sharesCMSClear.Click += new System.EventHandler(this.sharesCMSClear_Click);
-            // 
-            // sharedItemCMS
-            // 
-            this.sharedItemCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sharedItemCMSAdd,
-            this.sharedItemCMSRemove,
-            this.sharedItemCMSClear});
-            this.sharedItemCMS.Name = "sharedItemCMS";
-            this.sharedItemCMS.Size = new System.Drawing.Size(118, 70);
-            // 
-            // sharedItemCMSAdd
-            // 
-            this.sharedItemCMSAdd.Name = "sharedItemCMSAdd";
-            this.sharedItemCMSAdd.Size = new System.Drawing.Size(117, 22);
-            this.sharedItemCMSAdd.Text = "Add";
-            this.sharedItemCMSAdd.Click += new System.EventHandler(this.sharedItemCMSAdd_Click);
-            // 
-            // sharedItemCMSRemove
-            // 
-            this.sharedItemCMSRemove.Name = "sharedItemCMSRemove";
-            this.sharedItemCMSRemove.Size = new System.Drawing.Size(117, 22);
-            this.sharedItemCMSRemove.Text = "Remove";
-            this.sharedItemCMSRemove.Click += new System.EventHandler(this.sharedItemCMSRemove_Click);
-            // 
-            // sharedItemCMSClear
-            // 
-            this.sharedItemCMSClear.Name = "sharedItemCMSClear";
-            this.sharedItemCMSClear.Size = new System.Drawing.Size(117, 22);
-            this.sharedItemCMSClear.Text = "Clear";
-            this.sharedItemCMSClear.Click += new System.EventHandler(this.sharedItemCMSClear_Click);
+            this.sharesCMSClear.Click += new System.EventHandler(this.onSharesCMSClear_Click);
             // 
             // MainView
             // 
@@ -675,8 +635,8 @@ namespace KKShare.View
             this.Controls.Add(this.peersGroupBox);
             this.Name = "MainView";
             this.Text = "KKShare v0.1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainView_Closing);
-            this.Shown += new System.EventHandler(this.onMainViewShow);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.onMainView_Close);
+            this.Shown += new System.EventHandler(this.onMainView_Show);
             this.peersGroupBox.ResumeLayout(false);
             this.peersTabs.ResumeLayout(false);
             this.lanTabPage.ResumeLayout(false);
@@ -690,8 +650,7 @@ namespace KKShare.View
             this.browseTabs.ResumeLayout(false);
             this.searchTabPage.ResumeLayout(false);
             this.searchTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTLV)).EndInit();
             this.shareTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sharesOLV)).EndInit();
             this.downloadTabPage.ResumeLayout(false);
@@ -705,7 +664,6 @@ namespace KKShare.View
             this.netGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
             this.sharesCMS.ResumeLayout(false);
-            this.sharedItemCMS.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -736,11 +694,11 @@ namespace KKShare.View
         private System.Windows.Forms.Label portLabel;
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox nameTB;
         private System.Windows.Forms.ErrorProvider inputErrorProvider;
         private System.Windows.Forms.TabPage shareTabPage;
         private System.Windows.Forms.GroupBox downloadsGroupBox;
-        private System.Windows.Forms.TextBox downloadsTextBox;
+        private System.Windows.Forms.TextBox downloadsTB;
         private System.Windows.Forms.Button browseDownloadsButton;
         private System.Windows.Forms.GroupBox netGroupBox;
         private BrightIdeasSoftware.ObjectListView lanOLV;
@@ -752,18 +710,14 @@ namespace KKShare.View
         private BrightIdeasSoftware.ObjectListView internetOLV;
         private BrightIdeasSoftware.OLVColumn olvColumn13;
         private BrightIdeasSoftware.ObjectListView sharesOLV;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
-        private BrightIdeasSoftware.OLVColumn olvColumn11;
-        private BrightIdeasSoftware.ObjectListView objectListView2;
-        private BrightIdeasSoftware.TreeListView treeListView1;
+        private BrightIdeasSoftware.OLVColumn shareFolderOLVCol;
+        private BrightIdeasSoftware.OLVColumn shareFilesOLVCol;
+        private BrightIdeasSoftware.TreeListView searchTLV;
         private System.Windows.Forms.ContextMenuStrip sharesCMS;
         private System.Windows.Forms.ToolStripMenuItem sharesCMSAdd;
+        private System.Windows.Forms.ToolStripMenuItem sharesCMSRemove;
         private System.Windows.Forms.ToolStripMenuItem sharesCMSClear;
-        private System.Windows.Forms.ContextMenuStrip sharedItemCMS;
-        private System.Windows.Forms.ToolStripMenuItem sharedItemCMSAdd;
-        private System.Windows.Forms.ToolStripMenuItem sharedItemCMSRemove;
-        private System.Windows.Forms.ToolStripMenuItem sharedItemCMSClear;
-        private BrightIdeasSoftware.OLVColumn olvColumn14;
+        private BrightIdeasSoftware.OLVColumn shareSizeOLVCol;
     }
 }
 

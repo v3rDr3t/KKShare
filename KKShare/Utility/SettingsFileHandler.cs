@@ -50,8 +50,9 @@ namespace KKShare.Utility
         /// Creates a settings file with given values.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="name">The shares.</param>
-        internal void CreateSettingsFile(string name, List<Share> shares)
+        /// <param name="downloadsPath">The downloads folder path.</param>
+        /// <param name="shares">The shares.</param>
+        internal void CreateSettingsFile(string name, string downloadsPath, List<Share> shares)
         {
             xmlDocument.RemoveNodes();
             // add settings
@@ -63,13 +64,16 @@ namespace KKShare.Utility
             // add name
             XElement nameNode = new XElement(Constants.SETTINGS_FILE_NAME_NAME, name);
             networkNode.Add(nameNode);
+            // add downloads path
+            XElement downloadsPathNode = new XElement(Constants.SETTINGS_FILE_DOWNLOADS_NAME, downloadsPath);
+            networkNode.Add(downloadsPathNode);
             // add shares
             XElement sharesNode = new XElement(Constants.SETTINGS_FILE_SHARES_NAME);
             rootNode.Add(sharesNode);
             // add share paths
             foreach (Share share in shares)
             {
-                XElement shareNode = new XElement(Constants.SETTINGS_FILE_SHARE_PATH_NAME, share.FolderPath);
+                XElement shareNode = new XElement(Constants.SETTINGS_FILE_SHARE_PATH_NAME, share.DirPath);
                 sharesNode.Add(shareNode);
             }
 
@@ -79,9 +83,7 @@ namespace KKShare.Utility
         /// <summary>
         /// Reads the <code>Name</code> value from settings file.
         /// </summary>
-        /// <returns>
-        /// The <code>Name</code> value or the default value.
-        /// </returns>
+        /// <returns>The <code>Name</code> value or the default value.</returns>
         internal string ReadName()
         {
             XElement nameNode = xmlDocument.Root.Element(Constants.SETTINGS_FILE_NETWORK_NAME)
@@ -96,6 +98,28 @@ namespace KKShare.Utility
             }
         }
 
+        /// <summary>
+        /// Reads the <code>Downloads</code> folder value from settings file.
+        /// </summary>
+        /// <returns>The <code>Downloads</code> folder value or the default value.</returns>
+        internal string ReadDownloadsPath()
+        {
+            XElement downloadsPathNode = xmlDocument.Root.Element(Constants.SETTINGS_FILE_NETWORK_NAME)
+                .Element(Constants.SETTINGS_FILE_DOWNLOADS_NAME);
+            if (downloadsPathNode != null)
+            {
+                return downloadsPathNode.Value;
+            }
+            else
+            {
+                return System.Windows.Forms.Application.StartupPath;
+            }
+        }
+
+        /// <summary>
+        /// Reads the <code>Shares</code> values from settings file.
+        /// </summary>
+        /// <returns>The <code>Shares</code> values.</returns>
         internal List<string> ReadShares()
         {
             List<string> sharePaths = new List<string>();
