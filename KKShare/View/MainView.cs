@@ -85,16 +85,17 @@ namespace KKShare.View
         /// </summary>
         private void onNameTB_Validating(object sender, CancelEventArgs e)
         {
+            this.inputErrorProvider.SetIconPadding(this.nameTB, 3);
             switch (inputValidator.ValidateName(this.nameTB.Text))
             {
                 case NameResults.Error:
-                    inputErrorProvider.SetError(this.nameTB, "Invalid name!");
+                    this.inputErrorProvider.SetError(this.nameTB, "Invalid name!");
                     e.Cancel = true;
                     break;
 
                 default:
-                    inputErrorProvider.Clear();
-                    settingsController.SetName(this.nameTB.Text);
+                    this.inputErrorProvider.Clear();
+                    this.settingsController.SetName(this.nameTB.Text);
                     Log.Instance.AddMessage(Severity.Debug, "Changed PC name to \"" + this.nameTB.Text + "\".");
                     break;
             }
@@ -116,16 +117,17 @@ namespace KKShare.View
         /// </summary>
         private void onDownloadsTB_Validating(object sender, CancelEventArgs e)
         {
+            this.inputErrorProvider.SetIconPadding(this.downloadsTB, 3);
             switch (inputValidator.ValidateDownloads(this.downloadsTB.Text))
             {
                 case NameResults.Error:
-                    inputErrorProvider.SetError(this.downloadsTB, "Invalid folder!");
-                    //e.Cancel = true;
+                    this.inputErrorProvider.SetError(this.downloadsTB, "Invalid folder!");
+                    e.Cancel = true;
                     break;
 
                 default:
-                    inputErrorProvider.Clear();
-                    settingsController.SetDownloadsPath(this.downloadsTB.Text);
+                    this.inputErrorProvider.Clear();
+                    this.settingsController.SetDownloadsPath(this.downloadsTB.Text);
                     Log.Instance.AddMessage(Severity.Debug,
                         "Changed downloads folder to \"" + this.downloadsTB.Text + "\".");
                     break;

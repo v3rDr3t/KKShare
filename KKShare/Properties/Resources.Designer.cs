@@ -63,29 +63,9 @@ namespace KKShare.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fileCheck_accept {
+        internal static System.Drawing.Bitmap error32 {
             get {
-                object obj = ResourceManager.GetObject("fileCheck_accept", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap fileCheck_cancel {
-            get {
-                object obj = ResourceManager.GetObject("fileCheck_cancel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap fileCheck_error {
-            get {
-                object obj = ResourceManager.GetObject("fileCheck_error", resourceCulture);
+                object obj = ResourceManager.GetObject("error32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +76,36 @@ namespace KKShare.Properties {
         internal static System.Drawing.Bitmap fileCheck_preloader {
             get {
                 object obj = ResourceManager.GetObject("fileCheck_preloader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap success32 {
+            get {
+                object obj = ResourceManager.GetObject("success32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon warning16 {
+            get {
+                object obj = ResourceManager.GetObject("warning16", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning32 {
+            get {
+                object obj = ResourceManager.GetObject("warning32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

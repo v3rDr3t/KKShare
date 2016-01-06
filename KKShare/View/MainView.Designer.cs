@@ -81,6 +81,7 @@ namespace KKShare.View
             this.sharesCMSAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.sharesCMSRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.sharesCMSClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadsLabel = new System.Windows.Forms.Label();
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
@@ -511,6 +512,7 @@ namespace KKShare.View
             // 
             // downloadsGroupBox
             // 
+            this.downloadsGroupBox.Controls.Add(this.downloadsLabel);
             this.downloadsGroupBox.Controls.Add(this.downloadsTB);
             this.downloadsGroupBox.Controls.Add(this.browseDownloadsButton);
             this.downloadsGroupBox.Location = new System.Drawing.Point(6, 93);
@@ -518,13 +520,13 @@ namespace KKShare.View
             this.downloadsGroupBox.Size = new System.Drawing.Size(533, 54);
             this.downloadsGroupBox.TabIndex = 5;
             this.downloadsGroupBox.TabStop = false;
-            this.downloadsGroupBox.Text = "Downloads";
+            this.downloadsGroupBox.Text = "Misc";
             // 
             // downloadsTB
             // 
-            this.downloadsTB.Location = new System.Drawing.Point(9, 20);
+            this.downloadsTB.Location = new System.Drawing.Point(88, 20);
             this.downloadsTB.Name = "downloadsTB";
-            this.downloadsTB.Size = new System.Drawing.Size(482, 20);
+            this.downloadsTB.Size = new System.Drawing.Size(403, 20);
             this.downloadsTB.TabIndex = 1;
             this.downloadsTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onDownloadsTB_KeyPress);
             this.downloadsTB.Validating += new System.ComponentModel.CancelEventHandler(this.onDownloadsTB_Validating);
@@ -555,9 +557,9 @@ namespace KKShare.View
             // portTextBox
             // 
             this.portTextBox.Enabled = false;
-            this.portTextBox.Location = new System.Drawing.Point(70, 19);
+            this.portTextBox.Location = new System.Drawing.Point(88, 19);
             this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(142, 20);
+            this.portTextBox.Size = new System.Drawing.Size(124, 20);
             this.portTextBox.TabIndex = 1;
             this.portTextBox.Text = "51010";
             // 
@@ -572,9 +574,9 @@ namespace KKShare.View
             // 
             // nameTB
             // 
-            this.nameTB.Location = new System.Drawing.Point(70, 45);
+            this.nameTB.Location = new System.Drawing.Point(88, 45);
             this.nameTB.Name = "nameTB";
-            this.nameTB.Size = new System.Drawing.Size(142, 20);
+            this.nameTB.Size = new System.Drawing.Size(124, 20);
             this.nameTB.TabIndex = 3;
             this.nameTB.Text = "...";
             this.nameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onNameTB_KeyPress);
@@ -592,6 +594,7 @@ namespace KKShare.View
             // inputErrorProvider
             // 
             this.inputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.inputErrorProvider.Icon = Properties.Resources.warning16;
             this.inputErrorProvider.ContainerControl = this;
             this.inputErrorProvider.RightToLeft = true;
             // 
@@ -624,6 +627,15 @@ namespace KKShare.View
             this.sharesCMSClear.Size = new System.Drawing.Size(117, 22);
             this.sharesCMSClear.Text = "Clear";
             this.sharesCMSClear.Click += new System.EventHandler(this.onSharesCMSClear_Click);
+            // 
+            // downloadsLabel
+            // 
+            this.downloadsLabel.AutoSize = true;
+            this.downloadsLabel.Location = new System.Drawing.Point(6, 23);
+            this.downloadsLabel.Name = "downloadsLabel";
+            this.downloadsLabel.Size = new System.Drawing.Size(63, 13);
+            this.downloadsLabel.TabIndex = 4;
+            this.downloadsLabel.Text = "Downloads:";
             // 
             // MainView
             // 
@@ -718,6 +730,7 @@ namespace KKShare.View
         private System.Windows.Forms.ToolStripMenuItem sharesCMSRemove;
         private System.Windows.Forms.ToolStripMenuItem sharesCMSClear;
         private BrightIdeasSoftware.OLVColumn shareSizeOLVCol;
+        private System.Windows.Forms.Label downloadsLabel;
     }
 }
 

@@ -114,22 +114,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\fileCheck_preloader_32.GIF" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileCheck_accept.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileCheck_error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileCheck_cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileCheck_preloader2.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\fileCheck_preloader.GIF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
