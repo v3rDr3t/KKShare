@@ -69,6 +69,7 @@ namespace KKShare.View
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.settingsTabPage = new System.Windows.Forms.TabPage();
             this.downloadsGroupBox = new System.Windows.Forms.GroupBox();
+            this.downloadsLabel = new System.Windows.Forms.Label();
             this.downloadsTB = new System.Windows.Forms.TextBox();
             this.browseDownloadsButton = new System.Windows.Forms.Button();
             this.netGroupBox = new System.Windows.Forms.GroupBox();
@@ -76,12 +77,10 @@ namespace KKShare.View
             this.portLabel = new System.Windows.Forms.Label();
             this.nameTB = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.inputErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.sharesCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sharesCMSAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.sharesCMSRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.sharesCMSClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.downloadsLabel = new System.Windows.Forms.Label();
             this.peersGroupBox.SuspendLayout();
             this.peersTabs.SuspendLayout();
             this.lanTabPage.SuspendLayout();
@@ -104,7 +103,6 @@ namespace KKShare.View
             this.settingsTabPage.SuspendLayout();
             this.downloadsGroupBox.SuspendLayout();
             this.netGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).BeginInit();
             this.sharesCMS.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,7 +204,8 @@ namespace KKShare.View
             // 
             // logGroupBox
             // 
-            this.logGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.logGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.logGroupBox.Controls.Add(this.logFOLV);
             this.logGroupBox.Location = new System.Drawing.Point(12, 381);
@@ -221,7 +220,8 @@ namespace KKShare.View
             this.logFOLV.AllColumns.Add(this.olvColumn7);
             this.logFOLV.AllColumns.Add(this.olvColumn8);
             this.logFOLV.AllColumns.Add(this.olvColumn9);
-            this.logFOLV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.logFOLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.logFOLV.CellEditUseWholeCell = false;
             this.logFOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -288,6 +288,8 @@ namespace KKShare.View
             // 
             // browseTabs
             // 
+            this.browseTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.browseTabs.Controls.Add(this.searchTabPage);
             this.browseTabs.Location = new System.Drawing.Point(6, 6);
             this.browseTabs.Name = "browseTabs";
@@ -310,6 +312,8 @@ namespace KKShare.View
             // 
             // searchTLV
             // 
+            this.searchTLV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.searchTLV.CellEditUseWholeCell = false;
             this.searchTLV.Enabled = false;
             this.searchTLV.HighlightBackgroundColor = System.Drawing.Color.Empty;
@@ -325,6 +329,7 @@ namespace KKShare.View
             // 
             // searchButton
             // 
+            this.searchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchButton.Enabled = false;
             this.searchButton.Location = new System.Drawing.Point(490, 4);
             this.searchButton.Name = "searchButton";
@@ -335,6 +340,8 @@ namespace KKShare.View
             // 
             // searchTextBox
             // 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.searchTextBox.Enabled = false;
             this.searchTextBox.Location = new System.Drawing.Point(6, 5);
             this.searchTextBox.Name = "searchTextBox";
@@ -357,6 +364,8 @@ namespace KKShare.View
             this.sharesOLV.AllColumns.Add(this.shareFolderOLVCol);
             this.sharesOLV.AllColumns.Add(this.shareFilesOLVCol);
             this.sharesOLV.AllColumns.Add(this.shareSizeOLVCol);
+            this.sharesOLV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sharesOLV.BackColor = System.Drawing.SystemColors.Window;
             this.sharesOLV.CellEditUseWholeCell = false;
             this.sharesOLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -417,6 +426,8 @@ namespace KKShare.View
             this.downloadsTreeListView.AllColumns.Add(this.olvColumn1);
             this.downloadsTreeListView.AllColumns.Add(this.olvColumn2);
             this.downloadsTreeListView.AllColumns.Add(this.olvColumn3);
+            this.downloadsTreeListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.downloadsTreeListView.CellEditUseWholeCell = false;
             this.downloadsTreeListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
@@ -466,6 +477,8 @@ namespace KKShare.View
             this.uploadsTreeListView.AllColumns.Add(this.olvColumn4);
             this.uploadsTreeListView.AllColumns.Add(this.olvColumn5);
             this.uploadsTreeListView.AllColumns.Add(this.olvColumn6);
+            this.uploadsTreeListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.uploadsTreeListView.CellEditUseWholeCell = false;
             this.uploadsTreeListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn4,
@@ -512,6 +525,8 @@ namespace KKShare.View
             // 
             // downloadsGroupBox
             // 
+            this.downloadsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.downloadsGroupBox.Controls.Add(this.downloadsLabel);
             this.downloadsGroupBox.Controls.Add(this.downloadsTB);
             this.downloadsGroupBox.Controls.Add(this.browseDownloadsButton);
@@ -522,17 +537,29 @@ namespace KKShare.View
             this.downloadsGroupBox.TabStop = false;
             this.downloadsGroupBox.Text = "Misc";
             // 
+            // downloadsLabel
+            // 
+            this.downloadsLabel.AutoSize = true;
+            this.downloadsLabel.Location = new System.Drawing.Point(6, 23);
+            this.downloadsLabel.Name = "downloadsLabel";
+            this.downloadsLabel.Size = new System.Drawing.Size(63, 13);
+            this.downloadsLabel.TabIndex = 4;
+            this.downloadsLabel.Text = "Downloads:";
+            // 
             // downloadsTB
             // 
-            this.downloadsTB.Location = new System.Drawing.Point(88, 20);
+            this.downloadsTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadsTB.Location = new System.Drawing.Point(75, 20);
             this.downloadsTB.Name = "downloadsTB";
-            this.downloadsTB.Size = new System.Drawing.Size(403, 20);
+            this.downloadsTB.Size = new System.Drawing.Size(416, 20);
             this.downloadsTB.TabIndex = 1;
             this.downloadsTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onDownloadsTB_KeyPress);
             this.downloadsTB.Validating += new System.ComponentModel.CancelEventHandler(this.onDownloadsTB_Validating);
             // 
             // browseDownloadsButton
             // 
+            this.browseDownloadsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browseDownloadsButton.Location = new System.Drawing.Point(497, 19);
             this.browseDownloadsButton.Name = "browseDownloadsButton";
             this.browseDownloadsButton.Size = new System.Drawing.Size(30, 22);
@@ -543,6 +570,8 @@ namespace KKShare.View
             // 
             // netGroupBox
             // 
+            this.netGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.netGroupBox.Controls.Add(this.portTextBox);
             this.netGroupBox.Controls.Add(this.portLabel);
             this.netGroupBox.Controls.Add(this.nameTB);
@@ -557,9 +586,9 @@ namespace KKShare.View
             // portTextBox
             // 
             this.portTextBox.Enabled = false;
-            this.portTextBox.Location = new System.Drawing.Point(88, 19);
+            this.portTextBox.Location = new System.Drawing.Point(75, 19);
             this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(124, 20);
+            this.portTextBox.Size = new System.Drawing.Size(137, 20);
             this.portTextBox.TabIndex = 1;
             this.portTextBox.Text = "51010";
             // 
@@ -574,9 +603,9 @@ namespace KKShare.View
             // 
             // nameTB
             // 
-            this.nameTB.Location = new System.Drawing.Point(88, 45);
+            this.nameTB.Location = new System.Drawing.Point(75, 45);
             this.nameTB.Name = "nameTB";
-            this.nameTB.Size = new System.Drawing.Size(124, 20);
+            this.nameTB.Size = new System.Drawing.Size(137, 20);
             this.nameTB.TabIndex = 3;
             this.nameTB.Text = "...";
             this.nameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onNameTB_KeyPress);
@@ -590,13 +619,6 @@ namespace KKShare.View
             this.nameLabel.Size = new System.Drawing.Size(38, 13);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "Name:";
-            // 
-            // inputErrorProvider
-            // 
-            this.inputErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.inputErrorProvider.Icon = Properties.Resources.warning16;
-            this.inputErrorProvider.ContainerControl = this;
-            this.inputErrorProvider.RightToLeft = true;
             // 
             // sharesCMS
             // 
@@ -627,15 +649,6 @@ namespace KKShare.View
             this.sharesCMSClear.Size = new System.Drawing.Size(117, 22);
             this.sharesCMSClear.Text = "Clear";
             this.sharesCMSClear.Click += new System.EventHandler(this.onSharesCMSClear_Click);
-            // 
-            // downloadsLabel
-            // 
-            this.downloadsLabel.AutoSize = true;
-            this.downloadsLabel.Location = new System.Drawing.Point(6, 23);
-            this.downloadsLabel.Name = "downloadsLabel";
-            this.downloadsLabel.Size = new System.Drawing.Size(63, 13);
-            this.downloadsLabel.TabIndex = 4;
-            this.downloadsLabel.Text = "Downloads:";
             // 
             // MainView
             // 
@@ -674,7 +687,6 @@ namespace KKShare.View
             this.downloadsGroupBox.PerformLayout();
             this.netGroupBox.ResumeLayout(false);
             this.netGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inputErrorProvider)).EndInit();
             this.sharesCMS.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -707,7 +719,6 @@ namespace KKShare.View
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox nameTB;
-        private System.Windows.Forms.ErrorProvider inputErrorProvider;
         private System.Windows.Forms.TabPage shareTabPage;
         private System.Windows.Forms.GroupBox downloadsGroupBox;
         private System.Windows.Forms.TextBox downloadsTB;

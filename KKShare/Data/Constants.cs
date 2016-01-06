@@ -45,7 +45,7 @@ namespace KKShare.Data
 
         // property names
         public const string PROP_NAME_SETTINGS_NAME = "SettingsName";
-        public const string PROP_DOWNLAODS_SETTINGS_NAME = "SettingsDownloadsPath";
+        public const string PROP_DOWNLOADS_SETTINGS_NAME = "SettingsDownloadsPath";
         public const string PROP_NAME_LOG = "Log";
         public const string PROP_NAME_SHARES = "Shares";
 
