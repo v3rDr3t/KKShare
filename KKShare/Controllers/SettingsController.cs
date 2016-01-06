@@ -53,18 +53,42 @@ namespace KKShare.Controllers
         {
             if (settingsFileHandler.LoadSettingsFile())
             {
-                // load <Name>
+                InputValidator inputValidator = new InputValidator();
+
+                // load and validate <Name>
                 string name = settingsFileHandler.ReadName();
-                settings.Name = name;
+                switch (inputValidator.ValidateName(name))
+                {
+                    case NameResults.Error:
+                        this.settings.Name = System.Environment.MachineName;
+                        Log.Instance.AddMessage(Severity.Info,
+                            "The loaded PC name \"" + name + "\" is invalid! Defaulting...");
+                        break;
 
-                // load <DownloadsPath>
+                    default:
+                        this.settings.Name = name;
+                        break;
+                }
+
+                // load and validate <DownloadsPath>
                 string downloadsPath = settingsFileHandler.ReadDownloadsPath();
-                settings.DownloadsPath = downloadsPath;
+                switch (inputValidator.ValidateName(name))
+                {
+                    case NameResults.Error:
+                        this.settings.DownloadsPath = System.Windows.Forms.Application.StartupPath;
+                        Log.Instance.AddMessage(Severity.Info,
+                            "The loaded downloads folder \"" + downloadsPath + "\" does not exist! Defaulting...");
+                        break;
 
-                // load <...>
+                    default:
+                        this.settings.DownloadsPath = downloadsPath;
+                        break;
+                }
+
+                // load and validate <...>
                 // ...
 
-                // load <SharePath>s
+                // load and check <SharePath>s
                 List<string> shares = settingsFileHandler.ReadShares();
                 if (shares.Any())
                 {
@@ -73,14 +97,16 @@ namespace KKShare.Controllers
                     {
                         foreach (Share share in checkView.Shares)
                         {
-                            settings.AddShare(share);
+                            this.settings.AddShare(share);
                         }
                     }
                 }
             }
             else
             {
-                Log.Instance.AddMessage(Severity.Info, "No settings file found. Loading default settings.");
+                this.settings.Name = System.Environment.MachineName;
+                this.settings.DownloadsPath = System.Windows.Forms.Application.StartupPath;
+                Log.Instance.AddMessage(Severity.Info, "No settings file found. Using default settings.");
             }
         }
 

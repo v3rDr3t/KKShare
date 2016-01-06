@@ -24,8 +24,8 @@ namespace KKShare.Data
         public Settings()
         {
             this.port = Constants.DEFAULT_PORT;
-            this.name = System.Environment.MachineName;
-            this.downloadsPath = System.Windows.Forms.Application.StartupPath;
+            this.name = "...";
+            this.downloadsPath = "";
 
             shares = new List<Share>();
         }
@@ -39,11 +39,6 @@ namespace KKShare.Data
             shares.Add(share);
             PropertyChanged(this, new PropertyChangedEventArgs(Constants.PROP_NAME_SHARES));
             return true;
-        }
-
-        private void shareChanged(object sender, PropertyChangedEventArgs e)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(Constants.PROP_NAME_SHARES));
         }
 
         internal bool RemoveShares(List<Share> shares)
@@ -71,7 +66,7 @@ namespace KKShare.Data
 
         internal bool Set<T>(string propertyName, ref T field, T value)
         {
-            if (field == null || EqualityComparer<T>.Default.Equals(field, value))
+            if (field == null /*|| EqualityComparer<T>.Default.Equals(field, value)*/)
             {
                 return false;
             }
@@ -95,7 +90,7 @@ namespace KKShare.Data
         internal string DownloadsPath
         {
             get { return this.downloadsPath; }
-            set { Set(Constants.PROP_DOWNLAODS_SETTINGS_NAME, ref this.downloadsPath, value); }
+            set { Set(Constants.PROP_DOWNLOADS_SETTINGS_NAME, ref this.downloadsPath, value); }
         }
 
         internal List<Share> Shares

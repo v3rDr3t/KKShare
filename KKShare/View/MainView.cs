@@ -28,7 +28,7 @@ namespace KKShare.View
         public MainView()
         {
             InitializeComponent();
-            Log.Instance.PropertyChanged += new PropertyChangedEventHandler(logPropertyChanged);
+            Log.Instance.PropertyChanged += new PropertyChangedEventHandler(onLogProperty_Changed);
 
             inputValidator = new InputValidator();
             
@@ -60,7 +60,7 @@ namespace KKShare.View
         /// <summary>
         /// Initiates an update of a specific property. Triggered through a (property) change event.
         /// </summary>
-        private void logPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void onLogProperty_Changed(object sender, PropertyChangedEventArgs e)
         {
             UpdateProperty(e.PropertyName);
         }
@@ -85,20 +85,19 @@ namespace KKShare.View
         /// </summary>
         private void onNameTB_Validating(object sender, CancelEventArgs e)
         {
-            this.inputErrorProvider.SetIconPadding(this.nameTB, 3);
-            switch (inputValidator.ValidateName(this.nameTB.Text))
+            string name = this.nameTB.Text;
+            switch (inputValidator.ValidateName(name))
             {
                 case NameResults.Error:
-                    this.inputErrorProvider.SetError(this.nameTB, "Invalid name!");
-                    e.Cancel = true;
+                    name = System.Environment.MachineName;
+                    Log.Instance.AddMessage(Severity.Warning,
+                        "The entered PC name \"" + this.nameTB.Text + "\" is invalid! Defaulting...");
                     break;
 
                 default:
-                    this.inputErrorProvider.Clear();
-                    this.settingsController.SetName(this.nameTB.Text);
-                    Log.Instance.AddMessage(Severity.Debug, "Changed PC name to \"" + this.nameTB.Text + "\".");
                     break;
             }
+            this.settingsController.SetName(name);
         }
 
         /// <summary>
@@ -117,21 +116,19 @@ namespace KKShare.View
         /// </summary>
         private void onDownloadsTB_Validating(object sender, CancelEventArgs e)
         {
-            this.inputErrorProvider.SetIconPadding(this.downloadsTB, 3);
+            string downloadsPath = this.downloadsTB.Text;
             switch (inputValidator.ValidateDownloads(this.downloadsTB.Text))
             {
                 case NameResults.Error:
-                    this.inputErrorProvider.SetError(this.downloadsTB, "Invalid folder!");
-                    e.Cancel = true;
+                    downloadsPath = System.Windows.Forms.Application.StartupPath;
+                    Log.Instance.AddMessage(Severity.Warning,
+                        "The selected folder \"" + this.downloadsTB.Text + "\" does not exist! Defaulting...");
                     break;
 
                 default:
-                    this.inputErrorProvider.Clear();
-                    this.settingsController.SetDownloadsPath(this.downloadsTB.Text);
-                    Log.Instance.AddMessage(Severity.Debug,
-                        "Changed downloads folder to \"" + this.downloadsTB.Text + "\".");
                     break;
             }
+            this.settingsController.SetDownloadsPath(downloadsPath);
         }
 
         /// <summary>
@@ -206,7 +203,7 @@ namespace KKShare.View
                     this.nameTB.Text = settingsController.GetName();
                     break;
 
-                case Constants.PROP_DOWNLAODS_SETTINGS_NAME:
+                case Constants.PROP_DOWNLOADS_SETTINGS_NAME:
                     this.downloadsTB.Text = settingsController.GetDownloadsPath();
                     break;
 

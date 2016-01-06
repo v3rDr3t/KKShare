@@ -23,7 +23,7 @@ namespace KKShare.Utility
 
         internal NameResults ValidateDownloads(string path)
         {
-            return (path.Equals(string.Empty) || System.IO.Directory.Exists(path))
+            return (System.IO.Directory.Exists(path))
                 ? NameResults.Valid
                 : NameResults.Error;
         }
