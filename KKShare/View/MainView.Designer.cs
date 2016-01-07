@@ -32,6 +32,7 @@ namespace KKShare.View
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.peersGroupBox = new System.Windows.Forms.GroupBox();
             this.peersTabs = new System.Windows.Forms.TabControl();
             this.lanTabPage = new System.Windows.Forms.TabPage();
@@ -50,6 +51,9 @@ namespace KKShare.View
             this.browseTabs = new System.Windows.Forms.TabControl();
             this.searchTabPage = new System.Windows.Forms.TabPage();
             this.searchTLV = new BrightIdeasSoftware.TreeListView();
+            this.searchFolderCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.searchFilesCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.searchSizeCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.searchButton = new System.Windows.Forms.Button();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.shareTabPage = new System.Windows.Forms.TabPage();
@@ -312,10 +316,18 @@ namespace KKShare.View
             // 
             // searchTLV
             // 
+            this.searchTLV.AllColumns.Add(this.searchFolderCol);
+            this.searchTLV.AllColumns.Add(this.searchFilesCol);
+            this.searchTLV.AllColumns.Add(this.searchSizeCol);
             this.searchTLV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchTLV.CellEditUseWholeCell = false;
-            this.searchTLV.Enabled = false;
+            this.searchTLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.searchFolderCol,
+            this.searchFilesCol,
+            this.searchSizeCol});
+            this.searchTLV.Cursor = System.Windows.Forms.Cursors.Default;
+            this.searchTLV.FullRowSelect = true;
             this.searchTLV.HighlightBackgroundColor = System.Drawing.Color.Empty;
             this.searchTLV.HighlightForegroundColor = System.Drawing.Color.Empty;
             this.searchTLV.Location = new System.Drawing.Point(6, 32);
@@ -326,6 +338,24 @@ namespace KKShare.View
             this.searchTLV.UseCompatibleStateImageBehavior = false;
             this.searchTLV.View = System.Windows.Forms.View.Details;
             this.searchTLV.VirtualMode = true;
+            // 
+            // searchFolderCol
+            // 
+            this.searchFolderCol.Groupable = false;
+            this.searchFolderCol.Hideable = false;
+            this.searchFolderCol.Text = "Folder";
+            this.searchFolderCol.Width = 388;
+            // 
+            // searchFilesCol
+            // 
+            this.searchFilesCol.Text = "Files";
+            this.searchFilesCol.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // searchSizeCol
+            // 
+            this.searchSizeCol.FillsFreeSpace = true;
+            this.searchSizeCol.Text = "Size";
+            this.searchSizeCol.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // searchButton
             // 
@@ -658,6 +688,7 @@ namespace KKShare.View
             this.Controls.Add(this.mainTabs);
             this.Controls.Add(this.logGroupBox);
             this.Controls.Add(this.peersGroupBox);
+            this.Icon = Properties.Resources.kkshare16;
             this.Name = "MainView";
             this.Text = "KKShare v0.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.onMainView_Close);
@@ -742,6 +773,9 @@ namespace KKShare.View
         private System.Windows.Forms.ToolStripMenuItem sharesCMSClear;
         private BrightIdeasSoftware.OLVColumn shareSizeOLVCol;
         private System.Windows.Forms.Label downloadsLabel;
+        private BrightIdeasSoftware.OLVColumn searchFolderCol;
+        private BrightIdeasSoftware.OLVColumn searchFilesCol;
+        private BrightIdeasSoftware.OLVColumn searchSizeCol;
     }
 }
 

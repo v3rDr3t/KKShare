@@ -28,33 +28,13 @@ namespace KKShare.View
         public MainView()
         {
             InitializeComponent();
+            setupSharesColumns();
+            setupSearchTLV();
+            setupSearchTLVColumns();
+
             Log.Instance.PropertyChanged += new PropertyChangedEventHandler(onLogProperty_Changed);
 
             inputValidator = new InputValidator();
-            
-            // format size column
-            this.shareSizeOLVCol.AspectToStringConverter = delegate (object cellValue) {
-                long bytesToFormat = (long)cellValue;
-                return formatSize(bytesToFormat);
-            };
-        }
-
-        /// <summary>
-        /// Creates a formated (readable) string from the given bytes.
-        /// </summary>
-        /// <param name="bytesToFormat">The given bytes.</param>
-        /// <returns>The formated folder size string.</returns>
-        private string formatSize(long bytesToFormat)
-        {
-            string[] suffixes = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
-            if (bytesToFormat == 0)
-            {
-                return "0 " + suffixes[0];
-            }
-            long bytes = Math.Abs(bytesToFormat);
-            int dimension = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
-            double fileSize = Math.Round(bytes / Math.Pow(1024, dimension), 2);
-            return (Math.Sign(bytesToFormat) * fileSize).ToString() + " " + suffixes[dimension];
         }
 
         /// <summary>
@@ -74,6 +54,9 @@ namespace KKShare.View
             commController.StartAnnouncementService();
         }
 
+        /// <summary>
+        /// ... . Triggered through an event.
+        /// </summary>
         private void onMainView_Close(object sender, FormClosingEventArgs e)
         {
             settingsController.WriteSettings();
@@ -213,6 +196,15 @@ namespace KKShare.View
 
                 case Constants.PROP_NAME_SHARES:
                     this.sharesOLV.SetObjects(settingsController.GetShares());
+
+                    // FIXME: Only for testing purposes
+                    //List<Node> roots = new List<Node>();
+                    //foreach (Share share in this.settingsController.GetShares())
+                    //{
+                    //    roots.Add(share.RootNode);
+                    //}
+                    //this.searchTLV.Roots = roots;
+
                     break;
 
                 default:
@@ -226,6 +218,7 @@ namespace KKShare.View
         private void onPeer_DoubleClick(object sender, EventArgs e)
         {
             Peer selectedPeer = (Peer)this.lanOLV.GetItem(this.lanOLV.SelectedIndex).RowObject;
+            this.commController.sendSharesRequest(selectedPeer);
             Log.Instance.AddMessage(Severity.Debug, "Connecting to " + selectedPeer.Name);
         }
 

@@ -73,10 +73,40 @@ namespace KKShare.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap file16 {
+            get {
+                object obj = ResourceManager.GetObject("file16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fileCheck_preloader {
             get {
                 object obj = ResourceManager.GetObject("fileCheck_preloader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder16 {
+            get {
+                object obj = ResourceManager.GetObject("folder16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon kkshare16 {
+            get {
+                object obj = ResourceManager.GetObject("kkshare16", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

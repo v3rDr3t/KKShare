@@ -35,7 +35,8 @@ namespace KKShare.ConnectionAndTransfers
                     : string.Empty;
 
                 // parse shares (as string) to list
-                this.shares = sharesAsString.Split(Constants.LIST_DELIMITER).ToList();
+                this.shares = sharesAsString.Split(new[] { Constants.MSG_SHARES_LIST_DELIMITER },
+                    StringSplitOptions.None).ToList();
 
             }
             catch (Exception)
@@ -51,9 +52,9 @@ namespace KKShare.ConnectionAndTransfers
             // convert type
             bytes.AddRange(BitConverter.GetBytes((int)base.Type));
 
-            if (shares.Any())
+            if (this.shares.Any())
             {
-                string sharesToString = String.Join(Constants.LIST_DELIMITER.ToString(), shares.ToArray());
+                string sharesToString = String.Join(Constants.MSG_SHARES_LIST_DELIMITER, this.shares.ToArray());
                 // convert shares (as string) length
                 int byteCount = Encoding.Default.GetByteCount(sharesToString);
                 bytes.AddRange(BitConverter.GetBytes(byteCount));

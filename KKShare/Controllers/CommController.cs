@@ -65,5 +65,14 @@ namespace KKShare.Controllers
                     break;
             }
         }
+
+        /// <summary>
+        /// Initiates the transmission of a 'SharesRequest' to the given peer.
+        /// </summary>
+        /// <param name="peer">The given peer.</param>
+        internal void sendSharesRequest(Peer peer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

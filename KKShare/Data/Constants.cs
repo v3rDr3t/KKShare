@@ -19,7 +19,10 @@ namespace KKShare.Data
         public const int MAXIMUM_FILE_PATH_LENGTH = 260;
 
         // messaging
-        public const char LIST_DELIMITER = '|';
+        public const char MSG_SHARES_INFO_FILE = 'F';
+        public const char MSG_SHARES_INFO_DIR = 'D';
+        public const char MSG_SHARES_INFO_DELIMITER = '|';
+        public const string MSG_SHARES_LIST_DELIMITER = "||";
 
         // settings file
         public const string SETTINGS_FILE_NAME = "kkshare_settings.xml";

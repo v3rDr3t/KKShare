@@ -37,10 +37,10 @@ namespace KKShare.Announcement
                 {
                     try
                     {
+                        // announce name
                         UDPMessage msg = new UDPMessage(UDPHeader.Announce, name);
                         byte[] data = msg.ToByte();
                         udpClient.Send(data, data.Length, localEP);
-                        //Log.Instance.AddMessage(Severity.Debug, "Sent LAN announcement: " + name);
                     }
                     catch (SocketException ex)
                     {
@@ -49,7 +49,7 @@ namespace KKShare.Announcement
                     await Task.Delay(Constants.ANNOUNCE_SEND_INTERVAL, cancelToken);
                 }
             }, cancelToken);
-            Log.Instance.AddMessage(Severity.Debug, "Started announcing...");
+            //Log.Instance.AddMessage(Severity.Debug, "Started announcing...");
         }
 
         internal void RestartSending(string name)
@@ -61,7 +61,7 @@ namespace KKShare.Announcement
         internal void StopSending()
         {
             cancelTSource.Cancel();
-            Log.Instance.AddMessage(Severity.Debug, "Stopped announcing...");
+            //Log.Instance.AddMessage(Severity.Debug, "Stopped announcing...");
         }
     }
 }
